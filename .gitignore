@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+# K ignores
+*.pdf
+*put.txt
+1.txt
+cmake-build-debug/
+.idea
