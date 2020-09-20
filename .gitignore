@@ -37,3 +37,7 @@
 1.txt
 cmake-build-debug/
 .idea
+report_template/
+*.aux
+*.synctex.gz
+*.log
