@@ -17,7 +17,7 @@ int ReadFromFile(const std::string& file_name, char **strings, int string_len, i
     strings[0] = (char*)malloc(sizeof(char)*string_len);
     while(fgets(strings[line], string_len, input_file) != nullptr)
     {
-        if (line - strings_capacity + 1)
+        if (line + 1 - strings_capacity) // line != strings_capacity - 1
         {
             ++line;
             strings[line] = (char *) malloc(sizeof(char) * string_len);
