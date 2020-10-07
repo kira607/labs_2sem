@@ -5,26 +5,41 @@
 
 #include "files_lib.h"
 
-int ReadFromFile(const std::string& file_name, char **strings, int string_len, int strings_capacity)
+int ReadFromFile(const std::string& file_name, char **strings)
 {
-    FILE *input_file = nullptr;
+    // open file
+    FILE *input_file;
     if((input_file = fopen(file_name.c_str(), "r")) == nullptr)
     {
         std::cout << "Could not open \"" << file_name << "\"\n";
         return -1;
     }
+
+    int chunk_len = 10;
     int line = 0;
-    strings[0] = (char*)malloc(sizeof(char)*string_len);
-    while(fgets(strings[line], string_len, input_file) != nullptr)
+    int line_size = 0;
+    strings[0] = (char*)malloc(sizeof(char) * chunk_len);
+    char current_char;
+    while((current_char = static_cast<char>(fgetc(input_file))) != EOF)
     {
-        if (line + 1 - strings_capacity) // line != strings_capacity - 1
+        ++line_size;
+
+        // extend memory for string if needed
+        if(line_size % chunk_len == 0)
         {
-            ++line;
-            strings[line] = (char *) malloc(sizeof(char) * string_len);
+            strings[line] = (char*)realloc(strings[line], sizeof(char) * (line_size + chunk_len));
         }
-        else
+
+        // add current_char in string
+        strcat(strings[line], current_char);
+
+        // to new line if needed
+        if (current_char == '\n')
         {
-            break;
+            strcat(strings[line], '\0');
+            line_size -= line_size;
+            ++line;
+            strings[line] = (char*)calloc(chunk_len, sizeof(char));
         }
     }
     fclose(input_file);
@@ -46,5 +61,18 @@ void WriteInFile(const std::string& file_name, char **strings, int lines_number)
         fputs(strings[line], output_file);
     }
 
+    fclose(output_file);
+}
+
+void WriteInFile(const std::string& file_name, char *string)
+{
+    FILE* output_file;
+    // write in file
+    if((output_file = fopen(file_name.c_str(), "w")) == nullptr)
+    {
+        std::cout << "Could not open \"" << file_name << "\"\n";
+        return;
+    }
+    fputs(string, output_file);
     fclose(output_file);
 }

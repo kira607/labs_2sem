@@ -4,13 +4,13 @@
 
 #include "delete_words_with_char.h"
 
-void DeleteWordsWithChar(char *strings[], int lines_number, int string_len, char bad_char)
+void DeleteWordsWithChar(char **strings, int lines_number, char bad_char)
 {
     for(int line = 0; line < lines_number; ++line)
     {
         char *string = strings[line];
-        char *new_string = (char*)calloc(sizeof(char), string_len);
-        char *word = (char*)calloc(sizeof(char), string_len);
+        char *new_string = (char*)calloc(sizeof(char), strlen(string));
+        char *word = (char*)calloc(sizeof(char), strlen(string));
 
         if(!IfStringContainsChar(string, bad_char)) continue;
 
@@ -25,7 +25,7 @@ void DeleteWordsWithChar(char *strings[], int lines_number, int string_len, char
                     strcat(new_string, character);
                 }
                 free(word);
-                word = (char*)calloc(sizeof(char), string_len);
+                word = (char*)calloc(sizeof(char), strlen(string));
                 continue;
             }
             else

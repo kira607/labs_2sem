@@ -11,6 +11,6 @@
 #include "if_string_contains_char.h"
 #include "strcat_impl.h"
 
-void DeleteWordsWithChar(char *strings[], int lines_number, int string_len, char bad_char);
+void DeleteWordsWithChar(char *strings[], int lines_number, char bad_char);
 
 #endif //LAB1_DELETE_WORDS_WITH_CHAR_H

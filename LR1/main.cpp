@@ -10,15 +10,28 @@ int main()
 {
     char *input_file_name = (char*)"../input.txt";
     char *output_file_name = (char*)"../output.txt";
-    const int max_string_len = 256;
-    const int max_strings_capacity = 256;
-    char* strings[max_strings_capacity];
-    int lines_number = ReadFromFile(input_file_name, strings, max_string_len, max_strings_capacity);
+    char **strings;
+    int lines_number = ReadFromFile(input_file_name, strings);
+    if(lines_number == -1)
+    {
+        return 1;
+    }
+    char **original_strings;
+    original_strings = (char**)malloc(sizeof(char*)*lines_number);
+    for (int line = 0; line < lines_number; ++line)
+    {
+        original_strings[line] = (char*)malloc(sizeof(char)*strlen(strings[line]));
+        strcpy(original_strings[line], strings[line]);
+    }
+    PrintArrayOfStrings(strings,lines_number);
     char bad_char;
     printf("Input char:");
     scanf("%c", &bad_char);
     printf("Deleting words with char: %c\n", bad_char);
-    DeleteWordsWithChar(strings, lines_number, max_string_len, bad_char);
+    DeleteWordsWithChar(strings, lines_number, bad_char);
+    std::cout << "RESULT:\n=======================================================\n";
+    PrintArrayOfStrings(strings, lines_number);
+    std::cout << "=======================================================\n";
     std::cout << "Writing changes in file...\n";
     WriteInFile(output_file_name, strings, lines_number);
     return 0;
