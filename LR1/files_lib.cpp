@@ -34,7 +34,7 @@ int ReadFromFile(const std::string& file_name, char **&strings)
         // add current_char in string
         strcat(strings[line], current_char);
 
-        // to new line if needed
+        // move to new line if needed
         if (current_char == '\n')
         {
             strcat(strings[line], '\0');
@@ -48,10 +48,10 @@ int ReadFromFile(const std::string& file_name, char **&strings)
         }
     }
     fclose(input_file);
-    return line;
+    return line_size ? line+1 : line;
 }
 
-void WriteInFile(const std::string& file_name, char **strings, int lines_number)
+void WriteInFile(const std::string& file_name, char **original_strings, char **strings, char bad_char, int lines_number)
 {
     FILE* output_file = nullptr;
     // write in file
@@ -63,21 +63,18 @@ void WriteInFile(const std::string& file_name, char **strings, int lines_number)
 
     for(int line = 0; line < lines_number; ++line)
     {
+        fputs(original_strings[line], output_file);
+    }
+
+    fputs("\n\nOperation: Delete words with a specific character\n", output_file);
+    fputs("Parameters: ", output_file);
+    fputc(bad_char, output_file);
+    fputs("\n\n", output_file);
+
+    for(int line = 0; line < lines_number; ++line)
+    {
         fputs(strings[line], output_file);
     }
 
-    fclose(output_file);
-}
-
-void WriteInFile(const std::string& file_name, char *string)
-{
-    FILE* output_file;
-    // write in file
-    if((output_file = fopen(file_name.c_str(), "w")) == nullptr)
-    {
-        std::cout << "Could not open \"" << file_name << "\"\n";
-        return;
-    }
-    fputs(string, output_file);
     fclose(output_file);
 }

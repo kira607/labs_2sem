@@ -8,15 +8,20 @@
 
 int main()
 {
+    void* m = (void*)main;
+    std::cout << m << '\n';
+    char* s = (char*)"sss";
+    std::cout << &s << '\n';
     char *input_file_name = (char*)"../input.txt";
-    char *output_file_name = (char*)"../output.txt";
     char **strings{};
     int lines_number = ReadFromFile(input_file_name, strings);
     if(lines_number == -1 || strings == nullptr)
     {
-
+        std::cout << "An Error occurred while reading file\n";
         return 1;
     }
+
+
     char **original_strings;
     original_strings = (char**)malloc(sizeof(char*)*lines_number);
     for (int line = 0; line < lines_number; ++line)
@@ -24,16 +29,19 @@ int main()
         original_strings[line] = (char*)malloc(sizeof(char)*strlen(strings[line]));
         strcpy(original_strings[line], strings[line]);
     }
-    PrintArrayOfStrings(strings,lines_number);
+
     char bad_char;
-    printf("Input char:");
-    scanf("%c", &bad_char);
-    printf("Deleting words with char: %c\n", bad_char);
+    std::cout << "\nInput char:";
+    std::cin >> bad_char;
+    std::cout << "Deleting words with char: " << bad_char << "\n";
     DeleteWordsWithChar(strings, lines_number, bad_char);
+
     std::cout << "RESULT:\n=======================================================\n";
     PrintArrayOfStrings(strings, lines_number);
-    std::cout << "=======================================================\n";
+    std::cout << "\n=======================================================\n";
+
     std::cout << "Writing changes in file...\n";
-    WriteInFile(output_file_name, strings, lines_number);
+    char *output_file_name = (char*)"../output.txt";
+    WriteInFile(output_file_name, original_strings, strings, bad_char, lines_number);
     return 0;
 }
