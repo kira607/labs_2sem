@@ -10,10 +10,11 @@ int main()
 {
     char *input_file_name = (char*)"../input.txt";
     char *output_file_name = (char*)"../output.txt";
-    char **strings;
+    char **strings{};
     int lines_number = ReadFromFile(input_file_name, strings);
-    if(lines_number == -1)
+    if(lines_number == -1 || strings == nullptr)
     {
+
         return 1;
     }
     char **original_strings;

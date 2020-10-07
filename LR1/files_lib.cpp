@@ -5,7 +5,7 @@
 
 #include "files_lib.h"
 
-int ReadFromFile(const std::string& file_name, char **strings)
+int ReadFromFile(const std::string& file_name, char **&strings)
 {
     // open file
     FILE *input_file;
@@ -15,19 +15,20 @@ int ReadFromFile(const std::string& file_name, char **strings)
         return -1;
     }
 
-    int chunk_len = 10;
+    const int string_chunk_len = 10, lines_chunk_len = 3;
     int line = 0;
     int line_size = 0;
-    strings[0] = (char*)malloc(sizeof(char) * chunk_len);
+    strings = (char**)malloc(sizeof(char*) * lines_chunk_len);
+    strings[0] = (char*)malloc(sizeof(char) * string_chunk_len);
     char current_char;
     while((current_char = static_cast<char>(fgetc(input_file))) != EOF)
     {
         ++line_size;
 
         // extend memory for string if needed
-        if(line_size % chunk_len == 0)
+        if(line_size % string_chunk_len == 0)
         {
-            strings[line] = (char*)realloc(strings[line], sizeof(char) * (line_size + chunk_len));
+            strings[line] = (char*)realloc(strings[line], sizeof(char) * (line_size + string_chunk_len));
         }
 
         // add current_char in string
@@ -39,7 +40,11 @@ int ReadFromFile(const std::string& file_name, char **strings)
             strcat(strings[line], '\0');
             line_size -= line_size;
             ++line;
-            strings[line] = (char*)calloc(chunk_len, sizeof(char));
+            if(line % lines_chunk_len == 0)
+            {
+                strings = (char**)realloc(strings, sizeof(char*) * (line + lines_chunk_len));
+            }
+            strings[line] = (char*)calloc(string_chunk_len, sizeof(char));
         }
     }
     fclose(input_file);

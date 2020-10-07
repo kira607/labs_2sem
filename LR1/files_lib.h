@@ -11,7 +11,7 @@
 
 #include "strcat_impl.h"
 
-int ReadFromFile(const std::string& file_name, char **strings);
+int ReadFromFile(const std::string& file_name, char **&strings);
 void WriteInFile(const std::string& file_name, char **strings, int lines_number);
 
 #endif //LAB1_FILES_LIB_H
