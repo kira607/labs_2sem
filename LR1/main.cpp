@@ -8,10 +8,6 @@
 
 int main()
 {
-    void* m = (void*)main;
-    std::cout << m << '\n';
-    char* s = (char*)"sss";
-    std::cout << &s << '\n';
     char *input_file_name = (char*)"../input.txt";
     char **strings{};
     int lines_number = ReadFromFile(input_file_name, strings);
@@ -43,5 +39,6 @@ int main()
     std::cout << "Writing changes in file...\n";
     char *output_file_name = (char*)"../output.txt";
     WriteInFile(output_file_name, original_strings, strings, bad_char, lines_number);
+    std::cout << "Done\n";
     return 0;
 }
