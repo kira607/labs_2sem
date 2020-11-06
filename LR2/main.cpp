@@ -14,6 +14,7 @@ enum class GenType
     Input = 6,
     File = 7,
     None,
+    NUM = 7
 };
 
 struct Matrix2
@@ -165,12 +166,15 @@ void PrintMainMenu()
 
 GenType ChooseGenType()
 {
-    PrintMainMenu();
-    std::string message = "Input: ";
-    return static_cast<GenType>(Input(message));
+    int option;
+    do {
+        PrintMainMenu();
+        option = Input();
+    } while (option > static_cast<int>(GenType::NUM) || option <= 0);
+    return static_cast<GenType>(option);
 }
 
-Matrix2 InputWidthHeight()
+Matrix2 InputDimensions()
 {
     Matrix2 result{};
     result.width = Input("Width: ");
@@ -183,7 +187,6 @@ void Menu(Matrix2 &m)
     GenType task = ChooseGenType();
     if (task != GenType::File)
     {
-        m = InputWidthHeight();
         m = CreateMatrix(m.width, m.height, task);
     }
     else
@@ -195,7 +198,10 @@ void Menu(Matrix2 &m)
 
 int main()
 {
-    Matrix2 a{}, b{};
+    std::cout << "Matrix addition program. (c) 2020\n"
+                 "Enter the dimensions of the summed matrices: \n";
+
+    Matrix2 a = InputDimensions(), b = a;
 
     Menu(a);
     Menu(b);
