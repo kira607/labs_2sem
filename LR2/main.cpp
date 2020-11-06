@@ -62,7 +62,7 @@ int GenElement(GenType gen_type, int width = 0, int i = 0, int j = 0)
         {
             std::random_device rd;
             std::mt19937 Rand(rd());
-            return static_cast<int>(Rand()) % 10;
+            return std::abs(static_cast<int>(Rand())) % 10;
         }
         case GenType::Fill0:
             return i*width+j;
