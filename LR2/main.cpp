@@ -126,7 +126,7 @@ void Print(Matrix2 m)
     {
         for(int j = 0; j < m.width; ++j)
         {
-            std::cout << std::left << std::setw(5) << m.matrix[i][j] << " ";
+            std::cout << std::right << std::setw(5) << m.matrix[i][j] << " ";
         }
         std::cout << "\n";
     }
@@ -198,7 +198,16 @@ void Menu(Matrix2 &m)
         std::string file_name;
         std::cout << "Input name of file: ";
         std::cin >> file_name;
-        m = LoadMatrix(file_name);
+        Matrix2 lm = LoadMatrix(file_name);
+        if(lm.width != m.width || lm.height != m.height)
+        {
+            std::cout << "Loaded matrix has different dimensions with defined.\n"
+                         "Choose other file or generate matrix with the proposed options.\n";
+        }
+        else
+        {
+            m = lm;
+        }
     }
 
     std::cout << "Resulting matrix:\n";
@@ -212,11 +221,18 @@ int main()
 
     Matrix2 a = InputDimensions(), b = a;
 
+    std::cout << "\nMatrix 1: \n\n";
     Menu(a);
+    std::cout << "\nMatrix 2: \n\n";
     Menu(b);
 
     Matrix2 c = Sum(a, b);
-
+    std::cout << "============================================\n"
+                 "Sum:\n";
+    Print(a);
+    std::cout << "  +\n";
+    Print(b);
+    std::cout << "  =\n";
     Print(c);
 
     // Write(file, a);
