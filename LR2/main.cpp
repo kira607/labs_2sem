@@ -20,12 +20,12 @@ int main()
                  "Sum:\n";
 
     std::stringstream file_content;
-    std::string plus = "  +\n", equals = "  =\n";
+    std::string plus = "+\n", equals = "=\n";
 
     file_content << String(a)
-                 << plus
+                 << std::right << std::setw(4) << plus
                  << String(b)
-                 << equals
+                 << std::right << std::setw(4) << equals
                  << String(c);
 
     std::cout << file_content.str();
