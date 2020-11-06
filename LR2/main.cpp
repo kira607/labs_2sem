@@ -4,6 +4,9 @@
 #include <fstream>
 #include <random>
 
+#define _min_int std::numeric_limits<int>::min()
+#define _max_int std::numeric_limits<int>::max()
+
 enum class GenType
 {
     Zero = 1,
@@ -14,7 +17,6 @@ enum class GenType
     Input = 6,
     File = 7,
     None,
-    NUM = 7
 };
 
 struct Matrix2
@@ -23,7 +25,7 @@ struct Matrix2
     int **matrix;
 };
 
-int Input(const std::string& message = "Input: ")
+int Input(const std::string& message = "Input: ", int l = _min_int, int r = _max_int)
 {
     int element;
     bool input = true;
@@ -31,7 +33,7 @@ int Input(const std::string& message = "Input: ")
     {
         std::cout << message;
         std::cin >> element;
-        if(std::cin.fail())
+        if(std::cin.fail() || (element < l || element > r))
             std::cout << "Wrong input!\n";
         else
             input = false;
@@ -97,6 +99,10 @@ Matrix2 LoadMatrix(const std::string& file_name)
     Matrix2 result = Matrix2();
 
     std::ifstream fin(file_name);
+    if(!fin)
+    {
+        throw std::exception();
+    }
     fin >> result.width >> result.height;
 
     result.matrix = (int**)calloc(result.height, sizeof(int*));
@@ -167,18 +173,16 @@ void PrintMainMenu()
 GenType ChooseGenType()
 {
     int option;
-    do {
-        PrintMainMenu();
-        option = Input();
-    } while (option > static_cast<int>(GenType::NUM) || option <= 0);
+    PrintMainMenu();
+    option = Input("Input: ", 1, 7);
     return static_cast<GenType>(option);
 }
 
 Matrix2 InputDimensions()
 {
     Matrix2 result{};
-    result.width = Input("Width: ");
-    result.height = Input("Height: ");
+    result.width = Input("Width: ", 1);
+    result.height = Input("Height: ", 1);
     return result;
 }
 
@@ -191,9 +195,14 @@ void Menu(Matrix2 &m)
     }
     else
     {
-        std::string file_name = "m.matrix";
+        std::string file_name;
+        std::cout << "Input name of file: ";
+        std::cin >> file_name;
         m = LoadMatrix(file_name);
     }
+
+    std::cout << "Resulting matrix:\n";
+    Print(m);
 }
 
 int main()
