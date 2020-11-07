@@ -14,7 +14,9 @@
 \usepackage{tabularx}  % таблицы
 \usepackage{color}  % цветной код
 \usepackage{listings}  % листинги кода из файлов
-\usepackage{cite}  % ???
+\usepackage{cite}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor}  % ???
 \lstset{ %
 	language=C++,                   % выбор языка для подсветки (здесь это С++)
 	basicstyle=\small,              % размер и начертание шрифта для подсветки кода
@@ -156,8 +158,6 @@
 	
 	Функция по удалению слов, содержащих заданный символ, из массива строк. Принимает указатель на массив строк, количество строк и символ, который должен содержаться в словах для удаления.
 	
-	\if 0
-	
 	Алгоритм работы функции:
 	
 	Цикл по line от 0 до lines\_number
@@ -186,8 +186,6 @@
 		\item Присваиваем указателю адрес ячейки памяти, на которую указывает new\_string
 		\end{itemize}
 	
-	\fi
-	
 	\subsection*{ReadFromFile}
 	int ReadFromFile(const std::string\& file\_name, char **\&strings);
 	
@@ -196,8 +194,6 @@
 	Принимает имя файла и ссылку на указатель на указатель на char (необходимо, чтобы модифицировать оригинальный указатель). 
 	
 	Возвращает количество прочитанных строк.
-	
-	\if 0
 	
 	Алгоритм работы функции:
 	
@@ -225,16 +221,12 @@
 		\item Возвращаем количество считанных строк
 	\end{itemize}
 	
-	\fi
-	
 	\subsection*{WriteInFile}
 	void WriteInFile(const std::string\&, char **, char **, char, int);
 	
 	Функция для записи массива строк в файл.
 	
 	Принимает указатель на массив оригинальных строк, указатель на массив изменённых строк, символ, который содержался в удалённых словах и количество строк.
-	
-	\if 0
 	
 	Алгоритм работы функции:
 	
@@ -247,8 +239,6 @@
 		\item Закрываем файл
 	\end{itemize}
 	
-	\fi
-	
 	\subsection*{IfStringContainsChar}
 	bool IfStringContainsChar(char* string, char bad\_char);
 	
@@ -257,8 +247,6 @@
 	Принимает указатель на строку и проверяемый символ.
 	
 	Возвращает true, если символ найден, false в противном случае.
-	
-	\if 0
 	
 	Алгоритм работы функции:
 	
@@ -272,8 +260,6 @@
 		\item Возвращаем \textbf{false}
 	\end{itemize}
 	
-	\fi
-	
 	\subsection*{PrintArrayOfStrings}
 	void PrintArrayOfStrings(char **strings, int lines\_number);
 	
@@ -281,26 +267,20 @@
 	
 	Принимает указатель на массив строк и количество строк.
 	
-	\if 0
-	
 	Алгоритм работы функции:
 	
 	\begin{itemize}
 		\item Циклом по line от 0 до lines\_number печатаем строку
 	\end{itemize}
 	
-	\fi
-	
 	\subsection*{strcat}
 	char *strcat (char *dest, char character);
 	
-	Перегрузка функции strcat из strings.h. 
+	Перегрузка функции strcat из strings.h.
 	
 	Принимает указатель на исходную строку и символ для добавления в конец.
 	
 	Возвращает указатель на новую строку с добавленным символом.
-	
-	\if 0
 	
 	Алгоритм работы функции:
 	
@@ -312,9 +292,7 @@
 		\item Освобождаем память char\_ptr
 		\item Возвращаем указатель на dest
 	\end{itemize}
-	
-	\fi
-	
+
 	\section*{Алгоритм программы}
 	
 	\begin{itemize}
@@ -329,56 +307,66 @@
 	
 	\section*{Тестирование программы}
 	
-	Тесты с описанием действий. Обязательно картинки с результатами
+	Тесты с описанием действий.
+	Обязательно картинки с результатами
 	
 	\section*{Выводы}
-	
-	Вывод
+
+	В результате выполнения данной лабораторной работы мы закрепили и применили на практике знания,
+	полученные в ходе изучения темы
+	"Массивы указателей.
+	Динамическое управление памятью".
+	Реализованная программа соответствует поставленным задачам и безошибочно выполняет свою работу.
+	Функционал программы позволяет не только выполнять вычисления, но и реализует полноценное взаимодействие
+	с пользователем, корректно обрабатывать его запросы и выдавать ему
+	ожидаемый результат.
+	Выполнение данной лабораторной работы позволило углубить наши знания в технологии программирования типовых
+	задач обработки массивов указателей и динамического управления памятью.
 	
 	\newpage
 	\section*{Приложение А. Листинг программного кода}
 
 	\subsection*{main.cpp}
-	\lstinputlisting{src/main.cpp}
+	\lstinputlisting{../main.cpp}
 	
 	\newpage
 	\subsection*{delete\_words\_with\_char.cpp}
-	\lstinputlisting{src/delete_words_with_char.cpp}
+	\lstinputlisting{../delete_words_with_char.cpp}
 	
 	\newpage
 	\subsection*{delete\_words\_with\_char.h}
-	\lstinputlisting{src/delete_words_with_char.h}
+	\lstinputlisting{../delete_words_with_char.h}
 	
 	\newpage
 	\subsection*{files\_lib.cpp}
-	\lstinputlisting{src/files_lib.cpp}
+	\lstinputlisting{../files_lib.cpp}
 	
 	\newpage
 	\subsection*{files\_lib.h}
-	\lstinputlisting{src/files_lib.h}
+	\lstinputlisting{../files_lib.h}
 	
 	\newpage
 	\subsection*{if\_string\_contains\_char.cpp}
-	\lstinputlisting{src/if_string_contains_char.cpp}
+	\lstinputlisting{../if_string_contains_char.cpp}
 	
 	\newpage
 	\subsection*{if\_string\_contains\_char.h}
-	\lstinputlisting{src/if_string_contains_char.h}
+	\lstinputlisting{../if_string_contains_char.h}
 	
 	\newpage
 	\subsection*{print\_array\_of\_strings.cpp}
-	\lstinputlisting{src/print_array_of_strings.cpp}
+	\lstinputlisting{../print_array_of_strings.cpp}
 	
 	\newpage
 	\subsection*{print\_array\_of\_strings.h}
-	\lstinputlisting{src/print_array_of_strings.h}
+	\lstinputlisting{../print_array_of_strings.h}
 	
 	\newpage
 	\subsection*{strcat\_impl.cpp}
-	\lstinputlisting{src/strcat_impl.cpp}
+	\lstinputlisting{../strcat_impl.cpp}
 	
 	\newpage
 	\subsection*{strcat\_impl.h}
-	\lstinputlisting{src/strcat_impl.h}
+	\lstinputlisting{../strcat_impl.h}
 	
 \end{document}
