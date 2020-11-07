@@ -32,12 +32,6 @@
 *.app
 
 # K ignores
-*.pdf
-*put.txt
-1.txt
-cmake-build-debug/
-.idea
-report_template/
-*.aux
-*.synctex.gz
-*.log
+*cmake-build-debug/
+*.idea/
+*out/
