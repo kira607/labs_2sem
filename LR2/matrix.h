@@ -27,8 +27,8 @@ std::string String(const Matrix2 &m);
 
 void Print(const Matrix2 &m);
 
-Matrix2 Sum(Matrix2 a, Matrix2 b);
+Matrix2 Sum(const Matrix2 &a, const Matrix2 &b);
 
-void Delete(Matrix2 m);
+void Delete(Matrix2 &m);
 
 #endif //LAB2_MATRIX_H

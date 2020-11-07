@@ -2,20 +2,19 @@
 
 void PrintMainMenu()
 {
-    std::cout << "1 - Заполнить матрицу нулями" << "\n";
-    std::cout << "2 - Заполнить матрицу единицами" << "\n";
-    std::cout << "3 - Заполнить матрицу случайными числами (0-9)" << "\n";
-    std::cout << "4 - Заполнить матрицу порядковыми номерами (с 0)" << "\n";
-    std::cout << "5 - Заполнить матрицу порядковыми номерами (с 1)" << "\n";
-    std::cout << "6 - Заполнить матрицу вручную" << "\n";
-    std::cout << "7 - Загрузить матрицу из файла" << "\n";
+    std::cout << "1 - Fill matrix with 0" << "\n";
+    std::cout << "2 - Fill matrix with 1" << "\n";
+    std::cout << "3 - Fill matrix with random numbers (0-9)" << "\n";
+    std::cout << "4 - Fill matrix with ordinal numbers (begin with 0)" << "\n";
+    std::cout << "5 - Fill matrix with ordinal numbers (begin with 1)" << "\n";
+    std::cout << "6 - Fill matrix manually" << "\n";
+    std::cout << "7 - Load matrix form file" << "\n";
 }
 
 GenType ChooseGenType()
 {
-    int option;
     PrintMainMenu();
-    option = Input("Input: ", 1, 7);
+    int option = Input("Input: ", 1, 7);
     return static_cast<GenType>(option);
 }
 

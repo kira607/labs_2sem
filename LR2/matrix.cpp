@@ -71,7 +71,7 @@ void Print(const Matrix2 &m)
     std::cout << String(m);
 }
 
-Matrix2 Sum(Matrix2 a, Matrix2 b)
+Matrix2 Sum(const Matrix2 &a, const Matrix2 &b)
 {
     if(a.width != b.width || a.height != b.height)
     {
@@ -90,10 +90,11 @@ Matrix2 Sum(Matrix2 a, Matrix2 b)
     return result;
 }
 
-void Delete(Matrix2 m)
+void Delete(Matrix2 &m)
 {
     for(int i = 0; i < m.height; ++i)
     {
         free(m.matrix[i]);
     }
+    free(m.matrix);
 }
