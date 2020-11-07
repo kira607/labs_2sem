@@ -31,7 +31,6 @@ int main()
     std::cout << file_content.str();
 
     std::ofstream fout("output.txt");
-
     fout << file_content.str();
 
     Delete(a);

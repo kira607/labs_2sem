@@ -33,7 +33,7 @@ Matrix2 LoadMatrix(const std::string& file_name)
     std::ifstream fin(file_name);
     if(!fin)
     {
-        throw std::exception();
+        return result;
     }
     fin >> result.width >> result.height;
 

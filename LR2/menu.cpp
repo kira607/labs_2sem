@@ -24,11 +24,14 @@ bool TryLoad(Matrix2 &m)
     std::string file_name;
     std::cout << "Input name of file: ";
     std::cin >> file_name;
+
     Matrix2 lm = LoadMatrix(file_name);
 
-    if (lm.width != m.width || lm.height != m.height)
+    if (lm.width != m.width || lm.height != m.height || !lm.matrix)
     {
-        std::cout << "Loaded matrix has different dimensions with defined.\n"
+        std::cout << "Could not load matrix\n"
+                     "File does not exist or\n"
+                     "Loaded matrix has different dimensions with defined.\n"
                      "Choose other file or generate matrix with the proposed options.\n\n";
         return false;
     }

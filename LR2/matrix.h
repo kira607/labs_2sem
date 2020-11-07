@@ -12,8 +12,9 @@
 
 struct Matrix2
 {
-    int width, height;
-    int **matrix;
+    int width = 0;
+    int height = 0;
+    int **matrix = nullptr;
 };
 
 Matrix2 InputDimensions();
