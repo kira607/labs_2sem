@@ -1,34 +1,34 @@
-\input{inputs.tex}
+\newcommand{\department}{САПР}
+\newcommand{\labnum}{2}
+\newcommand{\discipline}{Программирование}
+\newcommand{\theme}{Функции, обеспечивающие обработку массива}
+\newcommand{\haspartner}{1}
+\newcommand{\partnername}{Миллер В.В.}
+\newcommand{\teachername}{Кузьмин С.А.}
+\newcommand{\labyear}{2020}
+
+\input{modules/inputs.tex}
 
 \begin{document}
 
-	\input{title_page.tex}
+	\input{modules/title_page.tex}
+
+	\input{modules/chapters/goal.tex}
+
+	\input{modules/chapters/task_defenition.tex}
+
+	\input{modules/chapters/files_formats.tex}
+
+	\input{modules/chapters/data_structures_description.tex}
+
+	\input{modules/chapters/functions_description.tex}
+
+	\input{modules/chapters/programm_algorithm.tex}
+
+	\input{modules/chapters/tests.tex}
+
+	\input{modules/chapters/conclusion.tex}
 	
-	\section*{Цель работы}
-	\input{goal.tex}
-
-	\section*{Формулировка задания}
-	\input{task_defenition.tex}
-
-	\section*{Форматы входных и выходных файлов}
-	\input{files_formats.tex}
-
-	\section*{Описание структур данных}
-	\input{data_structures_description.tex}
-
-	\section*{Описание пользовательских функций}
-	\input{functions_description.tex}
-
-	\section*{Алгоритм программы}
-	\input{programm_algorithm.tex}
-
-	\section*{Тестирование программы}
-	\input{tests.tex}
-
-	\section*{Выводы}
-	\input{conclusion.tex}
-
-	\section*{Приложение А. Листинг программного кода}
-	\input{listing.tex}
+	\input{modules/chapters/listing.tex}
 
 \end{document}
