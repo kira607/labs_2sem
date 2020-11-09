@@ -10,7 +10,7 @@
 
     \textbf{им. В.И. Ульянова (Ленина)}
 
-    \textbf{Кафедра САПР}
+    \textbf{Кафедра \department}
     }
 \end{center}
 
@@ -20,9 +20,9 @@
 \begin{center}
     \Large{
     \textbf{
-    ЛАБОРАТОРНАЯ РАБОТА №N\\
-    по дисциплине «Программирование»\\
-    Тема: Тема\\
+    ЛАБОРАТОРНАЯ РАБОТА №\labnum\\
+    по дисциплине «\discipline»\\
+    Тема: \theme\\
     }
     }
 \end{center}
@@ -31,14 +31,16 @@
 
 \begin{tabular}{lcr}
     Студенты гр. 9892 & \begin{tabular}{p{60mm}} \\ \hline \end{tabular} & Лескин К.А.  \\\\
-                      & \begin{tabular}{p{60mm}} \\ \hline \end{tabular} & Миллер В.В.  \\\\
-    Преподаватель     & \begin{tabular}{p{60mm}} \\ \hline \end{tabular} & Кузьмин С.А.
+    \if \haspartner 1
+                      & \begin{tabular}{p{60mm}} \\ \hline \end{tabular} & \partnername \\\\
+    \fi
+    Преподаватель     & \begin{tabular}{p{60mm}} \\ \hline \end{tabular} & \teachername
     \\\\
 \end{tabular}
 
 \begin{center}
     Санкт-Петербург\\
-    2020
+    \labyear
 \end{center}
 
 \newpage
