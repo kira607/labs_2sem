@@ -1,1 +1,1 @@
-# labs_2sem
+# Laboratory works, programming, 3 sem, SPbETU "LETI"
