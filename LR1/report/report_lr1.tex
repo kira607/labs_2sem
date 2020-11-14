@@ -10,6 +10,8 @@
 \setlength{\parindent}{0.75cm}
 \usepackage[labelsep=endash]{caption}  % тире вместо двоеточия в картинках
 \usepackage{graphicx}  % кртинки
+\usepackage{float}
+\usepackage{wrapfig}
 \usepackage{comment}  % комментарии
 \usepackage{tabularx}  % таблицы
 \usepackage{color}  % цветной код
@@ -130,7 +132,14 @@
 	
 	\section*{Форматы входных и выходных файлов}
 	
-	Входной файл представляет собой обычный текстовый файл, в котором содержится набор исходных строк текста.
+	Входной файл представляет собой обычный текстовый файл, в котором содержится набор исходных строк текста (пример на рис. \ref{ife}).
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/file_example}
+		\caption{Пример входного файла}
+		\label{ife}
+	\end{figure}
 	
 	Выходной файл запысывается следующем формате:
 	\begin{itemize}
@@ -139,12 +148,21 @@
 		\item потом должны быть записаны введённые данные и параметры;
 		\item после чего уже должны быть записаны полученные строки.
 	\end{itemize}
+
+	Пример выходного файла на рис. \ref{ofe}.
 	
-	\newpage
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/test.1.file}
+		\caption{Пример выходного файла}
+		\label{ofe}
+	\end{figure}
+	
 	\section*{Описание структур данных}
 	
-	Для хранения строк, считанных из файла, используется массив указателей на строки (каждая строка имеет тип данных \textbf{char*}). Доступ к массиву осуществляется через указатель на него. Память под строки и массив указателей на них выделяется динамически. Структура хранения данных указана на рис. \ref{data_schema}.
-	\begin{figure}[hpt!]
+	Для хранения строк, считанных из файла, используется массив указателей на строки (каждая строка имеет тип данных \textbf{char*}). Доступ к массиву осуществляется через указатель на него (тип \textbf{char**}). Память под строки и массив указателей на них выделяется динамически. Структура хранения данных указана на рис. \ref{data_schema}.
+	
+	\begin{figure}[H]
 		\centering
 	 	\includegraphics[width=0.6\linewidth]{photo/data_schema}
 	 	\caption{Структура хранения данных, считанных из файла}
@@ -304,11 +322,59 @@
 		\item Печатаем результат с помощью PrintArrayOfStrings
 		\item Записываем Изменения в файл с помощью WriteInFile
 	\end{itemize}
+
+	\newpage
 	
 	\section*{Тестирование программы}
 	
-	Тесты с описанием действий.
-	Обязательно картинки с результатами
+	Тестирование проводилось на файле, показанном на рис. \ref{file_example}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/file_example}
+		\caption{Исходный файл для тестов}
+		\label{file_example}
+	\end{figure}
+	
+	Тест с вводом символа l. Вывод в консоль на рис. \ref{test.1.console}, Результирующий
+	файл на рис. \ref{test.1.file}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/test.1.console}
+		\caption{Тест №1 -- консоль}
+		\label{test.1.console}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/test.1.file}
+		\caption{Тест №1 -- файл}
+		\label{test.1.file}
+	\end{figure}
+
+	\newpage
+
+	Тест с вводом символа a. Вывод в консоль на рис. \ref{test.2.console}, Результирующий
+	файл на рис. \ref{test.2.file}.
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/test.2.console}
+		\caption{Тест №2 -- консоль}
+		\label{test.2.console}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.6\linewidth]{photo/test.2.file}
+		\caption{Тест №2 -- файл}
+		\label{test.2.file}
+	\end{figure}
+
+	\ \\
+
+	\newpage
 	
 	\section*{Выводы}
 
