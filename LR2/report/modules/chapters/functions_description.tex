@@ -44,17 +44,17 @@
 Алгоритм работы функции:
 
 \begin{itemize}
-	\item Задаём вводимый элемент
-	\item Создаём флаг, сигнализирующий конец цикла
-	\item Пока флаг поднят:
+	\item int element;
+	\item bool input = true;
+	\item Пока input == true
 	\subitem Вывести сообщение
 	\subitem Ввести элемент
 	\subitem Если ошибка ввода или введённый элемент не входит в допустимый диапазон
 	\subsubitem Выводим "Wrong input!"
 	\subitem Иначе
-	\subsubitem Опускаем флаг цикла
+	\subsubitem input = false;
 	\subitem Чистим поток cin от мусора
-	\item Возвращаем ведённый элемент
+	\item Возвращаем element
 \end{itemize}
 
 \subsection*{InputElement}
@@ -93,9 +93,9 @@
 Алгоритм работы функции:
 
 \begin{itemize}
-	\item Создаём результирующую матрицу
-	\item Записываем в ширину результат ввода
-	\item Записываем в высоту результат ввода
+	\item Matrix2 result{};
+	\item Записываем в ширину результат Input("Width: ", 1);
+	\item Записываем в высоту результат Input("Height: ", 1);
 	\item Возвращаем результирующую матрицу
 \end{itemize}
 
@@ -123,8 +123,8 @@
 		\item Выделяем память под элементы строки (размером $ width $)
 		\item Цикл по j от 0 до $ width $
 		\begin{itemize}
-			  \item Генерируем элемент с помощью GenElement
-			  \item Записываем элемент в матрицу
+			  \item int new\_element = GenElement(gen\_type, result.width, i, j);
+			  \item result.matrix[i][j] = new\_element;
 		\end{itemize}
 	\end{itemize}
 	\item Возвращаем результирующую матрицу
@@ -155,8 +155,8 @@
 		\item Выделяем память под элементы строки (размером $ width $)
 		\item Цикл по j от 0 до $ width $
 		\begin{itemize}
-			\item Считываем элемент из файла.
-			\item Записываем элемент в матрицу
+			\item fin >> new\_element;
+			\item result.matrix[i][j] = new\_element;
 		\end{itemize}
 	\end{itemize}
 	\item Возвращаем результирующую матрицу
@@ -182,7 +182,8 @@
 	\begin{itemize}
 		\item Цикл по j от 0 до $ width $ матрицы
 		\begin{itemize}
-			\item Записываем в поток смещённый вправо на 5 символов элемент матрицы
+			\item Записываем в поток смещённый вправо на 5 символов элемент матрицы\\
+			ss << std::right << std::setw(5) << m.matrix[i][j] << '' '' ;
 		\end{itemize}
 		\item Записываем в поток символ конца строки
 	\end{itemize}
@@ -204,7 +205,7 @@
 Алгоритм работы функции:
 
 \begin{itemize}
-	\item Вывести в stdout результат String()
+	\item Вывести в stdout результат String(m);
 \end{itemize}
 
 \subsection*{Sum}
@@ -228,8 +229,7 @@
 	\begin{itemize}
 		\item Цикл по j от 0 до $ width $
 		\begin{itemize}
-			\item Записываем в результирующую матрицу сумму
-			элементов переданных матриц с соответствующими координатами.
+			\item result.matrix[i][j] = a.matrix[i][j] + b.matrix[i][j];
 		\end{itemize}
 	\end{itemize}
 	\item Возвращаем результирующую матрицу
@@ -254,7 +254,7 @@
 	\begin{itemize}
 		\item Освобождаем память $ i $ -ой строки.
 	\end{itemize}
-	\item Освобождаем массив указателей
+	\item free(m.matrix);
 \end{itemize}
 
 \subsection*{PrintMainMenu}
@@ -291,7 +291,8 @@
 
 \begin{itemize}
 	\item Выводим меню
-	\item Считываем пользовательский ввод (в диапазоне 1--7)
+	\item Считываем пользовательский ввод (в диапазоне 1--7)\\
+	int option = Input(''Input: '', 1, 7);
 	\item Возвращаем считанное число, приведённое к типу GenType
 \end{itemize}
 
@@ -312,14 +313,14 @@
 
 \begin{itemize}
 	\item Считываем имя файла
-	\item Загружаем матрицу
+	\item Matrix2 lm = LoadMatrix(file\_name);
 	\item Если размеры матриц не совпадают или матрица пустая
 	\begin{itemize}
 		\item Выводим сообщение об ошибке
-		\item Возвращаем false
+		\item return false;
 	\end{itemize}
-	\item Присваиваем переданной матрице загруженную
-	\item Возвращаем true
+	\item m = lm;
+	\item return true;
 \end{itemize}
 
 \subsection*{Menu}
@@ -337,15 +338,15 @@
 Алгоритм работы функции:
 
 \begin{itemize}
-	\item Создаём флаг, сигнализирующий конец цикла
-	\item Пока флаг поднят:
+	\item bool continue\_ = true;
+	\item Пока continue:
 	\begin{itemize}
 		  \item Считываем тип генерации
 		  \item Если тип генерации НЕ файл
 		  \subitem Создаём матрицу на основе типа генерации
-		  \subitem Опускаем флаг цикла
+		  \subitem continue\_ = false;
 		  \item Иначе
-		  \subitem Флаг цикла = Успешности загрузки матрицы (TryLoad)
+		  \subitem continue\_ = !TryLoad(m);
 	\end{itemize}
-	\item Выводим полученную матрицу на экран
+	\item Выводим полученную матрицу на экран Print(m);
 \end{itemize}
