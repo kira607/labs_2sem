@@ -43,8 +43,7 @@ Driver::Driver(const Driver &driver)
 
 Driver *DriverList::Add(const Driver &driver)
 {
-    auto *new_driver = new Driver();
-    *new_driver = driver;
+    auto *new_driver = new Driver(driver);
 
     if (size == 0)
     {

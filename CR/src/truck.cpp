@@ -24,7 +24,7 @@ Truck::Truck(const Truck &truck)
     next = nullptr;
 }
 
-[[nodiscard]] Truck *TruckList::Get(int index) const
+Truck *TruckList::Get(int index) const
 {
     _check_index(index);
 
@@ -41,8 +41,7 @@ Truck::Truck(const Truck &truck)
 
 Truck *TruckList::Add(const Truck &truck)
 {
-    auto *new_truck = new Truck();
-    *new_truck = truck;
+    auto *new_truck = new Truck(truck);
 
     if (size == 0)
     {
