@@ -48,7 +48,7 @@ struct RouteDataBase
     RouteList list{};
     std::string db_path;
 
-    explicit RouteDataBase(const std::string &db_path_ = "../dbs/driverdb.csv");
+    explicit RouteDataBase(const std::string &db_path_ = "../dbs/routedb.csv");
 
     void _load_base();
 

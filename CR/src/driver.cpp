@@ -160,7 +160,7 @@ void DriverDataBase::_load_base()
     Driver driver{};
 
     io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "name", "surname", "patronymic", "brand_code");
+    in.read_header(io::ignore_extra_column, "surname", "name", "patronymic", "brand_code");
     int brand_code;
     while(in.read_row(driver.name, driver.surname, driver.patronymic, brand_code))
     {
