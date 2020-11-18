@@ -117,10 +117,10 @@ void TruckList::Print(int index) const
 {
     _check_index(index);
     auto t = Get(index);
-    std::cout << static_cast<int>(t->brand) << " " <<
-              t->capacity << " " <<
-              t->transportation_distance << " " <<
-              t->mileage_per_day << "\n";
+    std::cout << str(t->brand) << " "
+              << t->capacity << " "
+              << t->transportation_distance << " "
+              << t->mileage_per_day << "\n";
 }
 
 void TruckList::Free()

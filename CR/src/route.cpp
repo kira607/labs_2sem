@@ -119,8 +119,10 @@ void RouteList::Print(int index) const
 {
     _check_index(index);
     auto r = Get(index);
-    std::cout << static_cast<int>(r->destination) << " " << r->distance << " " << r->loading_time << " " << r->drivers
-              << "\n";
+    std::cout << str(r->destination) << " "
+              << r->distance << " "
+              << r->loading_time << " "
+              << r->drivers << "\n";
 }
 
 void RouteList::Free()

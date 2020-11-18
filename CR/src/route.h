@@ -11,23 +11,7 @@
 #define CSV_IO_NO_THREAD
 #include "../fast-cpp-csv-parser/csv.h"
 
-#include "truck_brand.h"
-
-//конечный пункт,
-//дальность,
-//время погрузки/разгрузки в конечных пунктах,
-//количество водителей
-
-enum class Destination
-{
-    Omsk,
-    Kaliningrad,
-    StPetersburg,
-    Novgorod,
-    Sochi,
-    Murmansk,
-    NONE
-};
+#include "destination.h"
 
 struct Route
 {

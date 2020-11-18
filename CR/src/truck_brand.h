@@ -5,6 +5,8 @@
 #ifndef COURSEWORK_TRUCK_BRAND_H
 #define COURSEWORK_TRUCK_BRAND_H
 
+#include <string>
+
 enum class TruckBrand
 {
     Volvo = 1,
@@ -19,5 +21,7 @@ enum class TruckBrand
     Mitsubishi = 10,
     NONE = 0
 };
+
+std::string str(TruckBrand truck_brand);
 
 #endif //COURSEWORK_TRUCK_BRAND_H

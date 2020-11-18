@@ -119,8 +119,10 @@ void DriverList::Print(int index) const
 {
     _check_index(index);
     auto d = Get(index);
-    std::cout << d->name << " " << d->surname << " " << d->patronymic << " " <<
-              static_cast<int>(d->truck_brand) << "\n";
+    std::cout << d->name << " "
+              << d->surname << " "
+              << d->patronymic << " "
+              << str(d->truck_brand) << "\n";
 }
 
 void DriverList::Free()
