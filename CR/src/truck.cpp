@@ -48,6 +48,8 @@ Truck *TruckList::Add(const Truck &truck)
     {
         head = new_truck;
         tail = new_truck;
+        new_truck->prev = nullptr;
+        new_truck->next = nullptr;
     }
     else
     {
@@ -58,7 +60,7 @@ Truck *TruckList::Add(const Truck &truck)
     }
 
     ++size;
-    return head;
+    return new_truck;
 }
 
 void TruckList::Delete(int index)
