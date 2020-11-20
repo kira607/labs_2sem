@@ -6,6 +6,7 @@
 #define COURSEWORK_TRUCK_BRAND_H
 
 #include <string>
+#include <stdexcept>
 
 enum class TruckBrand
 {

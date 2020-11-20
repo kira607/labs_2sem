@@ -16,4 +16,5 @@ std::string str(Destination destination)
         case Destination::Murmansk: return "Murmansk";
         case Destination::NONE: return "NONE";
     }
+    throw std::out_of_range("Unexpected destination value");
 }

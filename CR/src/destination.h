@@ -6,6 +6,7 @@
 #define COURSEWORK_DESTINATION_H
 
 #include <string>
+#include <stdexcept>
 
 enum class Destination
 {
