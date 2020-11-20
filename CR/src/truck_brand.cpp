@@ -20,6 +20,6 @@ std::string str(TruckBrand truck_brand)
         case TruckBrand::Mitsubishi: return "Mitsubishi";
         case TruckBrand::NONE: return "NONE";
     }
-    throw std::out_of_range("Unexpected destination value");
+    throw std::out_of_range("Unexpected truck brand value");
 }
 
