@@ -14,7 +14,7 @@ struct Date
     tm *date;
 
     Date();
-    void Parse(const std::string &date_str, const std::string &format = "");
+    void Set(const std::string &date_str, const std::string &format = "") const;
     [[nodiscard]] std::string String() const;
 };
 

@@ -10,7 +10,7 @@ Date::Date()
     default_format = "%d.%m.%Y %H:%M";
 }
 
-void Date::Parse(const std::string &date_str, const std::string &format)
+void Date::Set(const std::string &date_str, const std::string &format) const
 {
     std::string local_format;
     if (format.empty())

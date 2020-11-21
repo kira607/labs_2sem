@@ -22,6 +22,7 @@ struct Route
     int distance;
     int loading_time;
     int drivers;
+    int target_time_in_transit;
 
     Route *prev;
     Route *next;
@@ -55,6 +56,8 @@ struct RouteDataBase
     void Exit();
 
     // Request handler interface
+
+    const Route *Find(bool (*f)(const Route &)) const;
 
     // Administrator Console interface
 };

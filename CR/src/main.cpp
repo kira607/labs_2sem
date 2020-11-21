@@ -1,21 +1,43 @@
 #include "truck.h"
 #include "driver.h"
 #include "route.h"
+#include "request.h"
 
-int main()
+int func(int (*f)(int))
+{
+    return f(114);
+}
+
+int main(int argc, char *argv[])
 {
     TruckDataBase truck_db = TruckDataBase("../dbs/truckdb.csv");
-    truck_db.list.PrintAll();
-
-    std::cout << "=============\n";
-
     DriverDataBase driver_db = DriverDataBase("../dbs/driverdb.csv");
-    driver_db.list.PrintAll();
+    RouteDataBase route_db = RouteDataBase("../dbs/routedb.csv");
 
-    std::cout << "=============\n";
+    if (argc == 1)
+    {
+        // Administrator console
+        return 0;
+    }
+    else if (argc == 2)
+    {
+        // Handle request
+        //RequestHandler rh(std::string{argv[1]});
+        //rh.Run();
 
-    RouteDataBase route_db = RouteDataBase();
-    route_db.list.PrintAll();
+        RequestLoader rl;
+        Request request = rl.Load(argv[1]);
 
-    return 0;
+        int i = 4, j = 4;
+        int r = func([j](int i) -> int{return i + j;});
+
+        const Route *target_route;
+
+        std::cout << r << "\n";
+        //target_route = route_db.Find([&](const Route &r) -> bool
+        //                             { return r.destination == Destination::NONE; });
+        return 0;
+    }
+
+    return 255;
  }

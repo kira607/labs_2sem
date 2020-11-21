@@ -10,6 +10,7 @@ Route::Route()
     distance = 0;
     loading_time = 0;
     drivers = 0;
+    target_time_in_transit = 0;
 
     prev = nullptr;
     next = nullptr;
@@ -21,6 +22,7 @@ Route::Route(const Route &route)
     distance = route.distance;
     loading_time = route.loading_time;
     drivers = route.drivers;
+    target_time_in_transit = route.target_time_in_transit;
 
     prev = nullptr;
     next = nullptr;
@@ -159,10 +161,11 @@ void RouteDataBase::_load_base()
 {
     Route route{};
 
-    io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "destination_code", "distance", "loading_time", "drivers");
+    io::CSVReader<5> in(db_path);
+    in.read_header(io::ignore_extra_column, "destination_code", "distance", "loading_time", "drivers", "time_in_transit");
     int destination_code;
-    while(in.read_row(destination_code, route.distance, route.loading_time, route.drivers))
+    while(in.read_row(destination_code, route.distance, route.loading_time, route.drivers,
+                      route.target_time_in_transit))
     {
         route.destination = static_cast<Destination>(destination_code);
         list.Add(route);
@@ -172,4 +175,17 @@ void RouteDataBase::_load_base()
 void RouteDataBase::Exit()
 {
     list.Free();
+}
+
+const Route *RouteDataBase::Find(bool (*f)(const Route &)) const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        auto current_route = list.Get(i);
+        if(f(*current_route))
+        {
+            return current_route;
+        }
+    }
+    return nullptr;
 }
