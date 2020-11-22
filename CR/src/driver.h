@@ -18,6 +18,7 @@ struct Driver
     Driver();
     Driver(const Driver &driver);
 
+    int id;
     std::string surname;
     std::string name;
     std::string patronymic;

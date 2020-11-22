@@ -11,4 +11,4 @@ echo "Running..."
 echo "==============================================="
 echo ""
 
-./CourseWork
+./CourseWork ../requests/request1.csv

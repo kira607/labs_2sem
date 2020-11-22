@@ -3,11 +3,6 @@
 #include "route.h"
 #include "request.h"
 
-int func(int (*f)(int))
-{
-    return f(114);
-}
-
 int main(int argc, char *argv[])
 {
     TruckDataBase truck_db = TruckDataBase("../dbs/truckdb.csv");
@@ -28,14 +23,11 @@ int main(int argc, char *argv[])
         RequestLoader rl;
         Request request = rl.Load(argv[1]);
 
-        int i = 4, j = 4;
-        int r = func([j](int i) -> int{return i + j;});
+        const Route *target_route = route_db.Find(request.destination);
 
-        const Route *target_route;
+        // Truck DB find by request.truck_brand, request.cargo_weight, target_route->distance
+        // Driver DB find by request.departure_date, target_route->drivers
 
-        std::cout << r << "\n";
-        //target_route = route_db.Find([&](const Route &r) -> bool
-        //                             { return r.destination == Destination::NONE; });
         return 0;
     }
 

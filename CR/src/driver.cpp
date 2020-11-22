@@ -6,6 +6,7 @@
 
 Driver::Driver()
 {
+    id = -1;
     surname = "NONE";
     name = "NONE";
     patronymic = "NONE";
@@ -17,6 +18,7 @@ Driver::Driver()
 
 Driver::Driver(const Driver &driver)
 {
+    id = driver.id;
     surname = driver.surname;
     name = driver.name;
     patronymic = driver.patronymic;
@@ -119,8 +121,9 @@ void DriverList::Print(int index) const
 {
     _check_index(index);
     auto d = Get(index);
-    std::cout << d->name << " "
+    std::cout << d->id << " "
               << d->surname << " "
+              << d->name << " "
               << d->patronymic << " "
               << str(d->truck_brand) << "\n";
 }
@@ -159,10 +162,10 @@ void DriverDataBase::_load_base()
 {
     Driver driver{};
 
-    io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "surname", "name", "patronymic", "brand_code");
+    io::CSVReader<5> in(db_path);
+    in.read_header(io::ignore_extra_column, "id", "name", "surname", "patronymic", "brand_code");
     int brand_code;
-    while(in.read_row(driver.name, driver.surname, driver.patronymic, brand_code))
+    while(in.read_row(driver.id, driver.name, driver.surname, driver.patronymic, brand_code))
     {
         driver.truck_brand = static_cast<TruckBrand>(brand_code);
         list.Add(driver);

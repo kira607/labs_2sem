@@ -177,12 +177,12 @@ void RouteDataBase::Exit()
     list.Free();
 }
 
-const Route *RouteDataBase::Find(bool (*f)(const Route &)) const
+const Route *RouteDataBase::Find(Destination destination) const
 {
     for(int i = 0; i < list.size; ++i)
     {
-        auto current_route = list.Get(i);
-        if(f(*current_route))
+        Route *current_route = list.Get(i);
+        if(current_route->destination == destination)
         {
             return current_route;
         }

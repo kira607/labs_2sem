@@ -57,7 +57,7 @@ struct RouteDataBase
 
     // Request handler interface
 
-    const Route *Find(bool (*f)(const Route &)) const;
+    const Route *Find(Destination destination) const;
 
     // Administrator Console interface
 };
