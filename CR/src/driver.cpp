@@ -155,10 +155,10 @@ void DriverList::_check_index(const int &index) const
 DriverDataBase::DriverDataBase(const std::string &db_path_)
 {
     db_path = db_path_;
-    _load_base();
+    _loadDataBase();
 }
 
-void DriverDataBase::_load_base()
+void DriverDataBase::_loadDataBase()
 {
     Driver driver{};
 

@@ -51,7 +51,7 @@ struct RouteDataBase
 
     explicit RouteDataBase(const std::string &db_path_ = "../dbs/routedb.csv");
 
-    void _load_base();
+    void _loadDataBase();
 
     void Exit();
 

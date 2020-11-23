@@ -50,7 +50,7 @@ struct TruckDataBase
 
     explicit TruckDataBase(const std::string &db_path_ = "../dbs/truckdb.csv");
 
-    void _load_base();
+    void _loadDataBase();
 
     void Exit();
 

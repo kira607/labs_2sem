@@ -150,10 +150,10 @@ void TruckList::_check_index(const int &index) const
 TruckDataBase::TruckDataBase(const std::string &db_path_)
 {
     db_path = db_path_;
-    _load_base();
+    _loadDataBase();
 }
 
-void TruckDataBase::_load_base()
+void TruckDataBase::_loadDataBase()
 {
     Truck tr{};
 

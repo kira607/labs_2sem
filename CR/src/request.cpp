@@ -16,7 +16,7 @@ Request RequestLoader::Load(const std::string &file_name)
     {
         request.destination = static_cast<Destination>(destination_code);
         request.truck_brand = static_cast<TruckBrand>(truck_brand_code);
-        request.departure_date.Set(departure_date);
+        request.departure_date.SetFromString(departure_date);
     }
     return request;
 }

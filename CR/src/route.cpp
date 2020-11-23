@@ -154,10 +154,10 @@ void RouteList::_check_index(const int &index) const
 RouteDataBase::RouteDataBase(const std::string &db_path_)
 {
     db_path = db_path_;
-    _load_base();
+    _loadDataBase();
 }
 
-void RouteDataBase::_load_base()
+void RouteDataBase::_loadDataBase()
 {
     Route route{};
 

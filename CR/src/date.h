@@ -10,11 +10,17 @@
 
 struct Date
 {
-    std::string default_format;
-    tm *date;
+    std::string default_format{};
+    std::tm *date{};
+    std::time_t time{};
 
     Date();
-    void Set(const std::string &date_str, const std::string &format = "") const;
+    explicit Date(std::time_t time_to_set);
+    explicit Date(const std::string &date_str, const std::string &format = "");
+
+    void _init();
+    void SetFromString(const std::string &date_str, const std::string &format = "");
+    void SetFromTime(time_t time_to_set);
     [[nodiscard]] std::string String() const;
 };
 
