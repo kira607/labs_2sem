@@ -1,7 +1,3 @@
-//
-// Created by kiril on 20.11.2020.
-//
-
 #ifndef COURSEWORK_REQUEST_H
 #define COURSEWORK_REQUEST_H
 

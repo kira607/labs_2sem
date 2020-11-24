@@ -7,7 +7,7 @@ schedule(schedule)
     _loadDataBase();
 }
 
-Truck *TruckDataBase::Find(TruckBrand tb, int cargo_weight, int dist) const
+Truck *TruckDataBase::Find(TruckBrand tb, float cargo_weight, int dist) const
 {
     Truck *pTruck = list.head;
     while(pTruck)
@@ -23,21 +23,21 @@ Truck *TruckDataBase::Find(TruckBrand tb, int cargo_weight, int dist) const
     return nullptr;
 }
 
+void TruckDataBase::Exit()
+{
+    list.Free();
+}
+
 void TruckDataBase::_loadDataBase()
 {
-    Truck tr{};
+    Truck truck{};
 
     io::CSVReader<4> in(db_path);
     in.read_header(io::ignore_extra_column, "brand", "capacity", "transportation_distance", "mileage_per_day");
     int brand_code;
-    while(in.read_row(brand_code, tr.capacity, tr.transportation_distance, tr.mileage_per_day))
+    while(in.read_row(brand_code, truck.capacity, truck.transportation_distance, truck.mileage_per_day))
     {
-        tr.brand = static_cast<TruckBrand>(brand_code);
-        list.Add(tr);
+        truck.brand = static_cast<TruckBrand>(brand_code);
+        list.Add(truck);
     }
-}
-
-void TruckDataBase::Exit()
-{
-    list.Free();
 }

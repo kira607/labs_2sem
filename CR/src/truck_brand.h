@@ -1,7 +1,3 @@
-//
-// Created by kirill on 17.11.2020.
-//
-
 #ifndef COURSEWORK_TRUCK_BRAND_H
 #define COURSEWORK_TRUCK_BRAND_H
 

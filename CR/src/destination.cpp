@@ -1,7 +1,3 @@
-//
-// Created by kirill on 18.11.2020.
-//
-
 #include "destination.h"
 
 std::string str(Destination destination)

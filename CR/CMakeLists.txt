@@ -29,7 +29,7 @@ set(DRIVER
     src/driver/driver_list.h 
     src/driver/driver_db.cpp 
     src/driver/driver_db.h
-        src/driver/lib_driver.h)
+)
 
 set(ROUTE 
     src/route/route.cpp 

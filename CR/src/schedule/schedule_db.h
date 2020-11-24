@@ -13,18 +13,11 @@ struct ScheduleDataBase
     Schedule list{};
     std::string db_path;
 
-    ScheduleDataBase() = default;
     explicit ScheduleDataBase(const std::string &db_path_ = "../dbs/scheduledb.csv");
 
-    // Request handler interface
-
     bool IsFree(Truck *truck) const;
-    bool IsFree(Driver *driver);
+    bool IsFree(Driver *driver) const;
 
-    // Administrator Console interface
-
-    
-    
     void Exit();
 
     void _loadDataBase();

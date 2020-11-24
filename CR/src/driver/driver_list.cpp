@@ -4,38 +4,38 @@
 {
     _check_index(index);
 
-    auto d = head;
+    auto p = head;
     for(int i = 0; i < index; ++i)
     {
-        if(d->next)
-            d = d->next;
+        if(p->next)
+            p = p->next;
         else
             return nullptr;
     }
-    return d;
+    return p;
 }
 
 Driver *DriverList::Add(const Driver &driver)
 {
-    auto *new_driver = new Driver(driver);
+    auto *new_node = new Driver(driver);
 
     if (size == 0)
     {
-        head = new_driver;
-        tail = new_driver;
-        new_driver->prev = nullptr;
-        new_driver->next = nullptr;
+        head = new_node;
+        tail = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     }
     else
     {
-        new_driver->prev = tail;
-        new_driver->prev->next = new_driver;
-        new_driver->next = nullptr;
-        tail = new_driver;
+        new_node->prev = tail;
+        new_node->prev->next = new_node;
+        new_node->next = nullptr;
+        tail = new_node;
     }
 
     ++size;
-    return new_driver;
+    return new_node;
 }
 
 void DriverList::Delete(int index)
@@ -68,16 +68,16 @@ void DriverList::Delete(int index)
         return;
     }
 
-    auto t = Get(index);
+    auto p = Get(index);
 
-    if (!t)
+    if (!p)
     {
         return;
     }
 
-    t->next->prev = t->prev;
-    t->prev->next = t->next;
-    delete t;
+    p->next->prev = p->prev;
+    p->prev->next = p->next;
+    delete p;
     --size;
 }
 
@@ -92,22 +92,22 @@ void DriverList::PrintAll() const
 void DriverList::Print(int index) const
 {
     _check_index(index);
-    auto d = Get(index);
-    std::cout << d->id << " "
-              << d->surname << " "
-              << d->name << " "
-              << d->patronymic << " "
-              << str(d->truck_brand) << "\n";
+    auto p = Get(index);
+    std::cout << p->id << " "
+              << p->surname << " "
+              << p->name << " "
+              << p->patronymic << " "
+              << str(p->truck_brand) << "\n";
 }
 
 void DriverList::Free()
 {
-    Driver *d = head;
-    while(d != nullptr)
+    Driver *p = head;
+    while(p != nullptr)
     {
-        Driver *next = d->next;
-        delete d;
-        d = next;
+        Driver *next = p->next;
+        delete p;
+        p = next;
     }
     head = nullptr;
     tail = nullptr;

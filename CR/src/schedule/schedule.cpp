@@ -4,38 +4,38 @@ Delivery *Schedule::Get(int index) const
 {
     _check_index(index);
 
-    auto t = head;
+    auto p = head;
     for(int i = 0; i < index; ++i)
     {
-        if(t->next)
-            t = t->next;
+        if(p->next)
+            p = p->next;
         else
             return nullptr;
     }
-    return t;
+    return p;
 }
 
 Delivery *Schedule::Add(const Delivery &delivery)
 {
-    auto *new_delivery = new Delivery(delivery);
+    auto *new_node = new Delivery(delivery);
 
     if (size == 0)
     {
-        head = new_delivery;
-        tail = new_delivery;
-        new_delivery->prev = nullptr;
-        new_delivery->next = nullptr;
+        head = new_node;
+        tail = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     }
     else
     {
-        new_delivery->prev = tail;
-        new_delivery->prev->next = new_delivery;
-        new_delivery->next = nullptr;
-        tail = new_delivery;
+        new_node->prev = tail;
+        new_node->prev->next = new_node;
+        new_node->next = nullptr;
+        tail = new_node;
     }
 
     ++size;
-    return new_delivery;
+    return new_node;
 }
 
 void Schedule::Delete(int index)
@@ -68,16 +68,16 @@ void Schedule::Delete(int index)
         return;
     }
 
-    auto t = Get(index);
+    auto p = Get(index);
 
-    if (!t)
+    if (!p)
     {
         return;
     }
 
-    t->next->prev = t->prev;
-    t->prev->next = t->next;
-    delete t;
+    p->next->prev = p->prev;
+    p->prev->next = p->next;
+    delete p;
     --size;
 }
 
@@ -92,25 +92,25 @@ void Schedule::PrintAll() const
 void Schedule::Print(int index) const
 {
     _check_index(index);
-    auto d = Get(index);
-    std::cout << d->start << " "
-              << d->end << " "
-              << d->truck_id << " ";
-    for(int i = 0; i < d->drivers; ++i)
+    auto p = Get(index);
+    std::cout << p->start << " "
+              << p->end << " "
+              << p->truck_id << " ";
+    for(int i = 0; i < p->drivers; ++i)
     {
-        std::cout << d->drivers_ids[i] << ",";
+        std::cout << p->drivers_ids[i] << ";";
     }
     std::cout << "\n";
 }
 
 void Schedule::Free()
 {
-    Delivery *d = head;
-    while(d != nullptr)
+    Delivery *p = head;
+    while(p != nullptr)
     {
-        Delivery *next = d->next;
-        delete d;
-        d = next;
+        Delivery *next = p->next;
+        delete p;
+        p = next;
     }
     head = nullptr;
     tail = nullptr;

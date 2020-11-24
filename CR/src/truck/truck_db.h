@@ -15,16 +15,11 @@ struct TruckDataBase
 
     explicit TruckDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/truckdb.csv");
 
-    void _loadDataBase();
+    [[nodiscard]] Truck *Find(TruckBrand tb, float cargo_weight, int dist) const;
 
     void Exit();
 
-    // Request handler interface
-
-    //request.truck_brand, request.cargo_weight, target_route->distance
-    Truck *Find(TruckBrand tb, int cargo_weight, int dist) const;
-
-    // Administrator Console interface
+    void _loadDataBase();
 };
 
 #endif //COURSEWORK_TRUCK_DB_H

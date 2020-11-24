@@ -4,7 +4,7 @@ Truck::Truck()
 {
     id = -1;
     brand = TruckBrand::NONE;
-    capacity = 0;
+    capacity = 0.f;
     transportation_distance = 0;
     mileage_per_day = 0;
     prev = nullptr;
@@ -13,6 +13,7 @@ Truck::Truck()
 
 Truck::Truck(const Truck &truck)
 {
+    id = truck.id;
     brand = truck.brand;
     capacity = truck.capacity;
     transportation_distance = truck.transportation_distance;

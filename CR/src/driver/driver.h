@@ -5,9 +5,6 @@
 
 struct Driver
 {
-    Driver();
-    Driver(const Driver &driver);
-
     int id;
     std::string surname;
     std::string name;
@@ -16,6 +13,9 @@ struct Driver
 
     Driver *prev;
     Driver *next;
+
+    Driver();
+    Driver(const Driver &driver);
 };
 
 #endif //COURSEWORK_DRIVER_H

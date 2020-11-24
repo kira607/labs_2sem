@@ -3,9 +3,13 @@
 DriverDataBase::DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_)
 :schedule(schedule_ref)
 {
-    schedule = schedule_ref;
     db_path = db_path_;
     _loadDataBase();
+}
+
+void DriverDataBase::Exit()
+{
+    list.Free();
 }
 
 void DriverDataBase::_loadDataBase()
@@ -20,9 +24,4 @@ void DriverDataBase::_loadDataBase()
         driver.truck_brand = static_cast<TruckBrand>(brand_code);
         list.Add(driver);
     }
-}
-
-void DriverDataBase::Exit()
-{
-    list.Free();
 }

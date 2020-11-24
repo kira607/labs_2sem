@@ -4,38 +4,38 @@ Truck *TruckList::Get(int index) const
 {
     _check_index(index);
 
-    auto t = head;
+    auto p = head;
     for(int i = 0; i < index; ++i)
     {
-        if(t->next)
-            t = t->next;
+        if(p->next)
+            p = p->next;
         else
             return nullptr;
     }
-    return t;
+    return p;
 }
 
 Truck *TruckList::Add(const Truck &truck)
 {
-    auto *new_truck = new Truck(truck);
+    auto *new_node = new Truck(truck);
 
     if (size == 0)
     {
-        head = new_truck;
-        tail = new_truck;
-        new_truck->prev = nullptr;
-        new_truck->next = nullptr;
+        head = new_node;
+        tail = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     }
     else
     {
-        new_truck->prev = tail;
-        new_truck->prev->next = new_truck;
-        new_truck->next = nullptr;
-        tail = new_truck;
+        new_node->prev = tail;
+        new_node->prev->next = new_node;
+        new_node->next = nullptr;
+        tail = new_node;
     }
 
     ++size;
-    return new_truck;
+    return new_node;
 }
 
 void TruckList::Delete(int index)
@@ -68,16 +68,16 @@ void TruckList::Delete(int index)
         return;
     }
 
-    auto t = Get(index);
+    auto p = Get(index);
 
-    if (!t)
+    if (!p)
     {
         return;
     }
 
-    t->next->prev = t->prev;
-    t->prev->next = t->next;
-    delete t;
+    p->next->prev = p->prev;
+    p->prev->next = p->next;
+    delete p;
     --size;
 }
 
@@ -92,21 +92,21 @@ void TruckList::PrintAll() const
 void TruckList::Print(int index) const
 {
     _check_index(index);
-    auto t = Get(index);
-    std::cout << str(t->brand) << " "
-              << t->capacity << " "
-              << t->transportation_distance << " "
-              << t->mileage_per_day << "\n";
+    auto p = Get(index);
+    std::cout << str(p->brand) << " "
+              << p->capacity << " "
+              << p->transportation_distance << " "
+              << p->mileage_per_day << "\n";
 }
 
 void TruckList::Free()
 {
-    Truck *t = head;
-    while(t != nullptr)
+    Truck *p = head;
+    while(p != nullptr)
     {
-        Truck *next = t->next;
-        delete t;
-        t = next;
+        Truck *next = p->next;
+        delete p;
+        p = next;
     }
     head = nullptr;
     tail = nullptr;

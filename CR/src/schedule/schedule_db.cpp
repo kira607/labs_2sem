@@ -16,8 +16,13 @@ bool ScheduleDataBase::IsFree(Truck *truck) const
     return false;
 }
     
-bool ScheduleDataBase::IsFree(Driver *driver)
+bool ScheduleDataBase::IsFree(Driver *driver) const
 {
+    Delivery *pDelivery = list.head;
+    while(pDelivery)
+    {
+        pDelivery = pDelivery->next;
+    }
     return false;
 }
 

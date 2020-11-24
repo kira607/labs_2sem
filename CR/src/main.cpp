@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
 
         truck_db.list.PrintAll();
 
-        Driver d;
+        Truck *truck = truck_db.Find(request.truck_brand, request.cargo_weight, target_route->distance);
 
         // Truck DB find by request.truck_brand, request.cargo_weight, target_route->distance
 

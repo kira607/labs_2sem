@@ -5,9 +5,6 @@
 
 struct Route
 {
-    Route();
-    Route(const Route &driver);
-
     Destination destination;
     int distance;
     int loading_time;
@@ -16,6 +13,9 @@ struct Route
 
     Route *prev;
     Route *next;
+
+    Route();
+    Route(const Route &driver);
 };
 
 #endif //COURSEWORK_ROUTE_H

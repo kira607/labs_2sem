@@ -15,13 +15,9 @@ struct DriverDataBase
 
     explicit DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/driverdb.csv");
 
-    void _loadDataBase();
-
     void Exit();
 
-    // Request handler interface
-
-    // Administrator Console interface
+    void _loadDataBase();
 };
 
 #endif //COURSEWORK_DRIVER_DB_H

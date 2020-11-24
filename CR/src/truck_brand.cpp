@@ -1,7 +1,3 @@
-//
-// Created by kirill on 18.11.2020.
-//
-
 #include "truck_brand.h"
 
 std::string str(TruckBrand truck_brand)

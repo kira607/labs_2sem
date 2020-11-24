@@ -14,15 +14,11 @@ struct RouteDataBase
 
     explicit RouteDataBase(const std::string &db_path_ = "../dbs/routedb.csv");
 
-    void _loadDataBase();
+    [[nodiscard]] const Route *Find(Destination destination) const;
 
     void Exit();
 
-    // Request handler interface
-
-    [[nodiscard]] const Route *Find(Destination destination) const;
-
-    // Administrator Console interface
+    void _loadDataBase();
 };
 
 #endif //COURSEWORK_ROUTE_DB_H

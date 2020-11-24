@@ -4,38 +4,38 @@ Route *RouteList::Get(int index) const
 {
     _check_index(index);
 
-    auto r = head;
+    auto p = head;
     for(int i = 0; i < index; ++i)
     {
-        if(r->next)
-            r = r->next;
+        if(p->next)
+            p = p->next;
         else
             return nullptr;
     }
-    return r;
+    return p;
 }
 
 Route *RouteList::Add(const Route &route)
 {
-    auto *new_route = new Route(route);
+    auto *new_node = new Route(route);
 
     if (size == 0)
     {
-        head = new_route;
-        tail = new_route;
-        new_route->prev = nullptr;
-        new_route->next = nullptr;
+        head = new_node;
+        tail = new_node;
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
     }
     else
     {
-        new_route->prev = tail;
-        new_route->prev->next = new_route;
-        new_route->next = nullptr;
-        tail = new_route;
+        new_node->prev = tail;
+        new_node->prev->next = new_node;
+        new_node->next = nullptr;
+        tail = new_node;
     }
 
     ++size;
-    return new_route;
+    return new_node;
 }
 
 void RouteList::Delete(int index)
@@ -68,16 +68,16 @@ void RouteList::Delete(int index)
         return;
     }
 
-    auto t = Get(index);
+    auto p = Get(index);
 
-    if (!t)
+    if (!p)
     {
         return;
     }
 
-    t->next->prev = t->prev;
-    t->prev->next = t->next;
-    delete t;
+    p->next->prev = p->prev;
+    p->prev->next = p->next;
+    delete p;
     --size;
 }
 
@@ -92,21 +92,21 @@ void RouteList::PrintAll() const
 void RouteList::Print(int index) const
 {
     _check_index(index);
-    auto r = Get(index);
-    std::cout << str(r->destination) << " "
-              << r->distance << " "
-              << r->loading_time << " "
-              << r->drivers << "\n";
+    auto p = Get(index);
+    std::cout << str(p->destination) << " "
+              << p->distance << " "
+              << p->loading_time << " "
+              << p->drivers << "\n";
 }
 
 void RouteList::Free()
 {
-    Route *r = head;
-    while(r != nullptr)
+    Route *p = head;
+    while(p != nullptr)
     {
-        Route *next = r->next;
-        delete r;
-        r = next;
+        Route *next = p->next;
+        delete p;
+        p = next;
     }
     head = nullptr;
     tail = nullptr;

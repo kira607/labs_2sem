@@ -6,6 +6,24 @@ RouteDataBase::RouteDataBase(const std::string &db_path_)
     _loadDataBase();
 }
 
+const Route *RouteDataBase::Find(Destination destination) const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        Route *current_route = list.Get(i);
+        if(current_route->destination == destination)
+        {
+            return current_route;
+        }
+    }
+    return nullptr;
+}
+
+void RouteDataBase::Exit()
+{
+    list.Free();
+}
+
 void RouteDataBase::_loadDataBase()
 {
     Route route{};
@@ -19,22 +37,4 @@ void RouteDataBase::_loadDataBase()
         route.destination = static_cast<Destination>(destination_code);
         list.Add(route);
     }
-}
-
-void RouteDataBase::Exit()
-{
-    list.Free();
-}
-
-const Route *RouteDataBase::Find(Destination destination) const
-{
-    for(int i = 0; i < list.size; ++i)
-    {
-        Route *current_route = list.Get(i);
-        if(current_route->destination == destination)
-        {
-            return current_route;
-        }
-    }
-    return nullptr;
 }

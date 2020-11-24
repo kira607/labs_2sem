@@ -1,7 +1,3 @@
-//
-// Created by kirill on 18.11.2020.
-//
-
 #ifndef COURSEWORK_DESTINATION_H
 #define COURSEWORK_DESTINATION_H
 

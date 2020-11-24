@@ -5,17 +5,17 @@
 
 struct Truck
 {
-    Truck();
-    Truck(const Truck &truck);
-
     int id;
-    int capacity;
+    float capacity;
     int transportation_distance;
     int mileage_per_day;
     TruckBrand brand;
 
     Truck *prev;
     Truck *next;
+
+    Truck();
+    Truck(const Truck &truck);
 };
 
 #endif //COURSEWORK_TRUCK_H
