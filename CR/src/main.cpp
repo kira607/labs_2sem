@@ -1,15 +1,16 @@
-#include "truck.h"
-#include "driver.h"
-#include "route.h"
-#include "schedule.h"
+#include "truck/truck_db.h"
+#include "driver/driver_db.h"
+#include "route/route_db.h"
+#include "schedule/schedule_db.h"
 #include "request.h"
 
 int main(int argc, char *argv[])
 {
-    TruckDataBase truck_db = TruckDataBase("../dbs/truckdb.csv");
-    DriverDataBase driver_db = DriverDataBase("../dbs/driverdb.csv");
-    RouteDataBase route_db = RouteDataBase("../dbs/routedb.csv");
     ScheduleDataBase schedule_db = ScheduleDataBase("../dbs/scheduledb.csv");
+    TruckDataBase truck_db = TruckDataBase(schedule_db);
+    DriverDataBase driver_db = DriverDataBase(schedule_db);
+    RouteDataBase route_db = RouteDataBase();
+    
 
     if (argc == 1)
     {
@@ -32,11 +33,14 @@ int main(int argc, char *argv[])
         int full_delivery_time = target_route->target_time_in_transit * 2 + target_route->loading_time;
 
         Delivery delivery = Delivery(request.departure_date.time, full_delivery_time);
-        std::cout << delivery.start << "/" << delivery.end << "\n";
 
-        schedule_db.list.PrintAll();
+        truck_db.list.PrintAll();
+
+        Driver d;
 
         // Truck DB find by request.truck_brand, request.cargo_weight, target_route->distance
+
+        
         // Driver DB find by request.departure_date, target_route->drivers
 
         return 0;

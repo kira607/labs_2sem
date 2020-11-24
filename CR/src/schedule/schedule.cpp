@@ -1,40 +1,18 @@
 #include "schedule.h"
 
-Delivery::Delivery()
-{
-    _init();
-}
-
-Delivery::Delivery(std::time_t start_time, int hours)
-{
-    _init();
-    start = start_time;
-    end = start + hours * 60 * 60;
-}
-
-void Delivery::_init()
-{
-    start = 0;
-    end = 0;
-    drivers_ids = nullptr;
-    truck_id = -1; 
-    next = nullptr;
-    prev = nullptr;
-}
-
 Delivery *Schedule::Get(int index) const
 {
     _check_index(index);
 
-    auto r = head;
+    auto t = head;
     for(int i = 0; i < index; ++i)
     {
-        if(r->next)
-            r = r->next;
+        if(t->next)
+            t = t->next;
         else
             return nullptr;
     }
-    return r;
+    return t;
 }
 
 Delivery *Schedule::Add(const Delivery &delivery)
@@ -147,44 +125,4 @@ void Schedule::_check_index(const int &index) const
         message << "Index out of range (possible [0-" << size-1 << "], given " << index << ")";
         throw std::out_of_range(message.str().c_str());
     }
-}
-
-ScheduleDataBase::ScheduleDataBase(const std::string &db_path_)
-{
-    db_path = db_path_;
-    _loadDataBase();
-}
-
-void ScheduleDataBase::_loadDataBase()
-{
-    Delivery delivery{};
-    std::string drivers_ids_str;
-
-    io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "start", "end", "truck_id", "drivers_ids");
-    while(in.read_row(delivery.start, delivery.end, delivery.truck_id, drivers_ids_str))
-    {
-        delivery.drivers_ids = _parseDriversIdsStr(drivers_ids_str, delivery.drivers);
-        list.Add(delivery);
-    }
-}
-
-void ScheduleDataBase::Exit()
-{
-    list.Free();
-}
-
-int *ScheduleDataBase::_parseDriversIdsStr(const std::string &drivers_ids_str, int &drivers_count)
-{
-    drivers_count = 0;
-    int *drivers_ids = new int[1];
-    std::stringstream ss{drivers_ids_str};
-    int read_element;
-    while(ss >> read_element)
-    {
-        drivers_ids[drivers_count] = read_element;
-        ++drivers_count;
-        drivers_ids = (int*)realloc(drivers_ids, sizeof(int) * (drivers_count + 1));
-    }
-    return drivers_ids;
 }

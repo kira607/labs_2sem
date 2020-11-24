@@ -1,32 +1,4 @@
-//
-// Created by kirill on 18.11.2020.
-//
-
-#include "route.h"
-
-Route::Route()
-{
-    destination = Destination::NONE;
-    distance = 0;
-    loading_time = 0;
-    drivers = 0;
-    target_time_in_transit = 0;
-
-    prev = nullptr;
-    next = nullptr;
-}
-
-Route::Route(const Route &route)
-{
-    destination = route.destination;
-    distance = route.distance;
-    loading_time = route.loading_time;
-    drivers = route.drivers;
-    target_time_in_transit = route.target_time_in_transit;
-
-    prev = nullptr;
-    next = nullptr;
-}
+#include "route_list.h"
 
 Route *RouteList::Get(int index) const
 {
@@ -149,43 +121,4 @@ void RouteList::_check_index(const int &index) const
         message << "Index out of range (possible [0-" << size-1 << "], given " << index << ")";
         throw std::out_of_range(message.str().c_str());
     }
-}
-
-RouteDataBase::RouteDataBase(const std::string &db_path_)
-{
-    db_path = db_path_;
-    _loadDataBase();
-}
-
-void RouteDataBase::_loadDataBase()
-{
-    Route route{};
-
-    io::CSVReader<5> in(db_path);
-    in.read_header(io::ignore_extra_column, "destination_code", "distance", "loading_time", "drivers", "time_in_transit");
-    int destination_code;
-    while(in.read_row(destination_code, route.distance, route.loading_time, route.drivers,
-                      route.target_time_in_transit))
-    {
-        route.destination = static_cast<Destination>(destination_code);
-        list.Add(route);
-    }
-}
-
-void RouteDataBase::Exit()
-{
-    list.Free();
-}
-
-const Route *RouteDataBase::Find(Destination destination) const
-{
-    for(int i = 0; i < list.size; ++i)
-    {
-        Route *current_route = list.Get(i);
-        if(current_route->destination == destination)
-        {
-            return current_route;
-        }
-    }
-    return nullptr;
 }

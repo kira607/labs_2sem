@@ -1,28 +1,4 @@
-//
-// Created by kirill on 17.11.2020.
-//
-
-#include "truck.h"
-
-Truck::Truck()
-{
-    brand = TruckBrand::NONE;
-    capacity = 0;
-    transportation_distance = 0;
-    mileage_per_day = 0;
-    prev = nullptr;
-    next = nullptr;
-}
-
-Truck::Truck(const Truck &truck)
-{
-    brand = truck.brand;
-    capacity = truck.capacity;
-    transportation_distance = truck.transportation_distance;
-    mileage_per_day = truck.mileage_per_day;
-    prev = nullptr;
-    next = nullptr;
-}
+#include "truck_list.h"
 
 Truck *TruckList::Get(int index) const
 {
@@ -145,29 +121,4 @@ void TruckList::_check_index(const int &index) const
         message << "Index out of range (possible [0-" << size-1 << "], given " << index << ")";
         throw std::out_of_range(message.str().c_str());
     }
-}
-
-TruckDataBase::TruckDataBase(const std::string &db_path_)
-{
-    db_path = db_path_;
-    _loadDataBase();
-}
-
-void TruckDataBase::_loadDataBase()
-{
-    Truck tr{};
-
-    io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "brand", "capacity", "transportation_distance", "mileage_per_day");
-    int brand_code;
-    while(in.read_row(brand_code, tr.capacity, tr.transportation_distance, tr.mileage_per_day))
-    {
-        tr.brand = static_cast<TruckBrand>(brand_code);
-        list.Add(tr);
-    }
-}
-
-void TruckDataBase::Exit()
-{
-    list.Free();
 }

@@ -1,32 +1,4 @@
-//
-// Created by kirill on 17.11.2020.
-//
-
-#include "driver.h"
-
-Driver::Driver()
-{
-    id = -1;
-    surname = "NONE";
-    name = "NONE";
-    patronymic = "NONE";
-    truck_brand = TruckBrand::NONE;
-
-    prev = nullptr;
-    next = nullptr;
-}
-
-Driver::Driver(const Driver &driver)
-{
-    id = driver.id;
-    surname = driver.surname;
-    name = driver.name;
-    patronymic = driver.patronymic;
-    truck_brand = driver.truck_brand;
-
-    prev = nullptr;
-    next = nullptr;
-}
+#include "driver_list.h"
 
 [[nodiscard]] Driver *DriverList::Get(int index) const
 {
@@ -150,29 +122,4 @@ void DriverList::_check_index(const int &index) const
         message << "Index out of range (possible [0-" << size-1 << "], given " << index << ")";
         throw std::out_of_range(message.str().c_str());
     }
-}
-
-DriverDataBase::DriverDataBase(const std::string &db_path_)
-{
-    db_path = db_path_;
-    _loadDataBase();
-}
-
-void DriverDataBase::_loadDataBase()
-{
-    Driver driver{};
-
-    io::CSVReader<5> in(db_path);
-    in.read_header(io::ignore_extra_column, "id", "name", "surname", "patronymic", "brand_code");
-    int brand_code;
-    while(in.read_row(driver.id, driver.name, driver.surname, driver.patronymic, brand_code))
-    {
-        driver.truck_brand = static_cast<TruckBrand>(brand_code);
-        list.Add(driver);
-    }
-}
-
-void DriverDataBase::Exit()
-{
-    list.Free();
 }
