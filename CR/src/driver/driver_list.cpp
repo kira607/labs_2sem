@@ -81,25 +81,6 @@ void DriverList::Delete(int index)
     --size;
 }
 
-void DriverList::PrintAll() const
-{
-    for(int i = 0; i < size; ++i)
-    {
-        Print(i);
-    }
-}
-
-void DriverList::Print(int index) const
-{
-    _check_index(index);
-    auto p = Get(index);
-    std::cout << p->id << " "
-              << p->surname << " "
-              << p->name << " "
-              << p->patronymic << " "
-              << str(p->truck_brand) << "\n";
-}
-
 void DriverList::Free()
 {
     Driver *p = head;

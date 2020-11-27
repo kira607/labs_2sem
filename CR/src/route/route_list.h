@@ -15,8 +15,6 @@ struct RouteList
     [[nodiscard]] Route *Get(int index) const;
     Route *Add(const Route &route);
     void Delete(int index);
-    void PrintAll() const;
-    void Print(int index) const;
     void Free();
 
     void _check_index(const int &index) const;

@@ -7,6 +7,25 @@ schedule(schedule)
     _loadDataBase();
 }
 
+void TruckDataBase::PrintAll() const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        Print(i);
+    }
+}
+
+void TruckDataBase::Print(int index) const
+{
+    list._check_index(index);
+    auto p = list.Get(index);
+    std::cout << p-> id << " "
+              << str(p->brand) << " "
+              << p->capacity << " "
+              << p->transportation_distance << " "
+              << p->mileage_per_day << "\n";
+}
+
 Truck *TruckDataBase::Find(Request *request) const
 {
     Truck *pTruck = list.head;

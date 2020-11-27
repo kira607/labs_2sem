@@ -17,6 +17,9 @@ struct ScheduleDataBase
 
     explicit ScheduleDataBase(const std::string &db_path_ = "../dbs/scheduledb.csv");
 
+    void PrintAll() const;
+    void Print(int index) const;
+
     bool IsFree(Truck *truck, Request *request) const;
     bool IsFree(Driver *driver, Request *request) const;
     void Update(Date *current_date);

@@ -16,6 +16,9 @@ struct TruckDataBase
 
     explicit TruckDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/truckdb.csv");
 
+    void PrintAll() const;
+    void Print(int index) const;
+    
     [[nodiscard]] Truck *Find(Request *request) const;
 
     void Exit();

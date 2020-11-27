@@ -81,24 +81,6 @@ void RouteList::Delete(int index)
     --size;
 }
 
-void RouteList::PrintAll() const
-{
-    for(int i = 0; i < size; ++i)
-    {
-        Print(i);
-    }
-}
-
-void RouteList::Print(int index) const
-{
-    _check_index(index);
-    auto p = Get(index);
-    std::cout << str(p->destination) << " "
-              << p->distance << " "
-              << p->loading_time << " "
-              << p->drivers << "\n";
-}
-
 void RouteList::Free()
 {
     Route *p = head;

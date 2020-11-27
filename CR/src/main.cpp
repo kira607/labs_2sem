@@ -10,7 +10,6 @@ int main(int argc, char *argv[])
     TruckDataBase truck_db = TruckDataBase(schedule_db);
     DriverDataBase driver_db = DriverDataBase(schedule_db);
     RouteDataBase route_db = RouteDataBase();
-    
 
     if (argc == 1)
     {
@@ -19,12 +18,6 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
-        // Handle request
-        //RequestHandler rh(std::string{argv[1]});
-        //rh.Run();
-
-        //std::time_t now = std::time(nullptr);
-
         RequestLoader rl;
         Request request = rl.Load(argv[1]);
 
@@ -72,13 +65,6 @@ int main(int argc, char *argv[])
         delivery.drivers_ids = drivers_ids;
 
         schedule_db.Add(&delivery);
-
-        
-
-        // Truck DB find by request.truck_brand, request.cargo_weight, target_route->distance
-
-        
-        // Driver DB find by request.departure_date, target_route->drivers
 
         return 0;
     }

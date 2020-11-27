@@ -15,8 +15,6 @@ struct DriverList
     [[nodiscard]] Driver *Get(int index) const;
     Driver *Add(const Driver &driver);
     void Delete(int index);
-    void PrintAll() const;
-    void Print(int index) const;
     void Free();
 
     void _check_index(const int &index) const;

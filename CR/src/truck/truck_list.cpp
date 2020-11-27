@@ -81,25 +81,6 @@ void TruckList::Delete(int index)
     --size;
 }
 
-void TruckList::PrintAll() const
-{
-    for(int i = 0; i < size; ++i)
-    {
-        Print(i);
-    }
-}
-
-void TruckList::Print(int index) const
-{
-    _check_index(index);
-    auto p = Get(index);
-    std::cout << p-> id << " "
-              << str(p->brand) << " "
-              << p->capacity << " "
-              << p->transportation_distance << " "
-              << p->mileage_per_day << "\n";
-}
-
 void TruckList::Free()
 {
     Truck *p = head;

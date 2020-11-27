@@ -7,6 +7,25 @@ DriverDataBase::DriverDataBase(ScheduleDataBase &schedule_ref, const std::string
     _loadDataBase();
 }
 
+void DriverDataBase::PrintAll() const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        Print(i);
+    }
+}
+
+void DriverDataBase::Print(int index) const
+{
+    list._check_index(index);
+    auto p = list.Get(index);
+    std::cout << p->id << " "
+              << p->surname << " "
+              << p->name << " "
+              << p->patronymic << " "
+              << str(p->truck_brand) << "\n";
+}
+
 int *DriverDataBase::Find(Request *request)
 {
     Driver *pDriver = list.head;

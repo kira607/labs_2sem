@@ -15,8 +15,6 @@ struct Schedule
     [[nodiscard]] Delivery *Get(int index) const;
     Delivery *Add(const Delivery &delivery);
     void Delete(int index);
-    void PrintAll() const;
-    void Print(int index) const;
     void Free();
 
     void _check_index(const int &index) const;

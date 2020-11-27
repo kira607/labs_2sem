@@ -6,6 +6,24 @@ RouteDataBase::RouteDataBase(const std::string &db_path_)
     _loadDataBase();
 }
 
+void RouteDataBase::PrintAll() const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        Print(i);
+    }
+}
+
+void RouteDataBase::Print(int index) const
+{
+    list._check_index(index);
+    auto p = list.Get(index);
+    std::cout << str(p->destination) << " "
+              << p->distance << " "
+              << p->loading_time << " "
+              << p->drivers << "\n";
+}
+
 Route *RouteDataBase::Find(Destination destination) const
 {
     for(int i = 0; i < list.size; ++i)

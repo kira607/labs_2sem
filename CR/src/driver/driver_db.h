@@ -16,6 +16,9 @@ struct DriverDataBase
 
     explicit DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/driverdb.csv");
 
+    void PrintAll() const;
+    void Print(int index) const;
+    
     int *Find(Request *request);
 
     void Exit();

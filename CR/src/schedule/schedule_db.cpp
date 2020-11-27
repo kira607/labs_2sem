@@ -6,6 +6,28 @@ ScheduleDataBase::ScheduleDataBase(const std::string &db_path_)
     _loadDataBase();
 }
 
+void ScheduleDataBase::PrintAll() const
+{
+    for(int i = 0; i < list.size; ++i)
+    {
+        Print(i);
+    }
+}
+
+void ScheduleDataBase::Print(int index) const
+{
+    list._check_index(index);
+    auto p = list.Get(index);
+    std::cout << p->start << " "
+              << p->end << " "
+              << p->truck_id << " ";
+    for(int i = 0; i < p->drivers; ++i)
+    {
+        std::cout << p->drivers_ids[i] << ";";
+    }
+    std::cout << "\n";
+}
+
 bool ScheduleDataBase::IsFree(Truck *truck, Request *request) const
 {
     Delivery *pDelivery = list.head;

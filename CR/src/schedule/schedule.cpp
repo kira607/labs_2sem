@@ -81,28 +81,6 @@ void Schedule::Delete(int index)
     --size;
 }
 
-void Schedule::PrintAll() const
-{
-    for(int i = 0; i < size; ++i)
-    {
-        Print(i);
-    }
-}
-
-void Schedule::Print(int index) const
-{
-    _check_index(index);
-    auto p = Get(index);
-    std::cout << p->start << " "
-              << p->end << " "
-              << p->truck_id << " ";
-    for(int i = 0; i < p->drivers; ++i)
-    {
-        std::cout << p->drivers_ids[i] << ";";
-    }
-    std::cout << "\n";
-}
-
 void Schedule::Free()
 {
     Delivery *p = head;
