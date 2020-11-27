@@ -12,7 +12,6 @@ Truck *TruckDataBase::Find(Request *request) const
     Truck *pTruck = list.head;
     while(pTruck)
     {
-        std::cout << "check: " << pTruck->id << "\n";
         if(
             (pTruck->brand != request->truck_brand) ||
             (pTruck->capacity < request->cargo_weight) || 

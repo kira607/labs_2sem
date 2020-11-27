@@ -30,12 +30,9 @@ int main(int argc, char *argv[])
 
         std::time_t now_time = std::time(nullptr);
         Date now = Date(now_time);
-        now.SetFromTime(now.time + 1000 * 60 * 60);
-        std::cout << now.String() << "\n";
 
         schedule_db.Update(&now);
 
-        std::cout << request.departure_date.time << " < " << now.time << "\n";
         if(request.departure_date.time <= now.time)
         {
             std::cerr << "reqested departure date has past!\n";
@@ -52,6 +49,7 @@ int main(int argc, char *argv[])
         Truck *truck = truck_db.Find(&request);
         if(!truck)
         {
+            std::cerr << "Could not find free trucks on this date\n";
             return 120;
         }
         std::cout << "truck id:" << truck->id << "\n";
@@ -60,6 +58,7 @@ int main(int argc, char *argv[])
         int *drivers_ids = driver_db.Find(&request);
         if(!drivers_ids)
         {
+            std::cerr << "Could not find free drivers on this date\n";
             return 121;
         }
 

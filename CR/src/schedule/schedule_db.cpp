@@ -52,8 +52,9 @@ void ScheduleDataBase::Update(Date *date)
         Delivery *next = pDelivery->next;
         if(pDelivery->end < date->time) // if delivery has ended
             list.Delete(index);
+        else
+            ++index;
         pDelivery = next;
-        ++index;
     }
     _updateDbFile();
 }
