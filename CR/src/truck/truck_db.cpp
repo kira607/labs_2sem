@@ -7,18 +7,23 @@ schedule(schedule)
     _loadDataBase();
 }
 
-Truck *TruckDataBase::Find(TruckBrand tb, float cargo_weight, int dist) const
+Truck *TruckDataBase::Find(Request *request) const
 {
     Truck *pTruck = list.head;
     while(pTruck)
     {
-        if(pTruck->brand != tb)
+        std::cout << "check: " << pTruck->id << "\n";
+        if(
+            (pTruck->brand != request->truck_brand) ||
+            (pTruck->capacity < request->cargo_weight) || 
+            (pTruck->transportation_distance < request->target_route->distance) ||
+            (!schedule.IsFree(pTruck, request))
+        )
+        {
+            pTruck = pTruck->next;
             continue;
-        if(pTruck->capacity < cargo_weight)
-            continue;
-        if(schedule.IsFree(pTruck))
-            return pTruck;
-        pTruck = pTruck->next;
+        }
+        return pTruck;
     }
     return nullptr;
 }
@@ -32,10 +37,10 @@ void TruckDataBase::_loadDataBase()
 {
     Truck truck{};
 
-    io::CSVReader<4> in(db_path);
-    in.read_header(io::ignore_extra_column, "brand", "capacity", "transportation_distance", "mileage_per_day");
+    io::CSVReader<5> in(db_path);
+    in.read_header(io::ignore_extra_column, "id", "brand", "capacity", "transportation_distance", "mileage_per_day");
     int brand_code;
-    while(in.read_row(brand_code, truck.capacity, truck.transportation_distance, truck.mileage_per_day))
+    while(in.read_row(truck.id, brand_code, truck.capacity, truck.transportation_distance, truck.mileage_per_day))
     {
         truck.brand = static_cast<TruckBrand>(brand_code);
         list.Add(truck);

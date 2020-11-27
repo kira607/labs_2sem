@@ -6,7 +6,7 @@ RouteDataBase::RouteDataBase(const std::string &db_path_)
     _loadDataBase();
 }
 
-const Route *RouteDataBase::Find(Destination destination) const
+Route *RouteDataBase::Find(Destination destination) const
 {
     for(int i = 0; i < list.size; ++i)
     {

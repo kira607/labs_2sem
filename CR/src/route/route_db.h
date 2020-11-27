@@ -14,7 +14,7 @@ struct RouteDataBase
 
     explicit RouteDataBase(const std::string &db_path_ = "../dbs/routedb.csv");
 
-    [[nodiscard]] const Route *Find(Destination destination) const;
+    [[nodiscard]] Route *Find(Destination destination) const;
 
     void Exit();
 

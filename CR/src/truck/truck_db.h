@@ -5,6 +5,7 @@
 #include "../../fast-cpp-csv-parser/csv.h"
 
 #include "truck_list.h"
+#include "../request.h"
 #include "../schedule/schedule_db.h"
 
 struct TruckDataBase
@@ -15,7 +16,7 @@ struct TruckDataBase
 
     explicit TruckDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/truckdb.csv");
 
-    [[nodiscard]] Truck *Find(TruckBrand tb, float cargo_weight, int dist) const;
+    [[nodiscard]] Truck *Find(Request *request) const;
 
     void Exit();
 

@@ -10,12 +10,15 @@
 #include "destination.h"
 #include "truck_brand.h"
 #include "date.h"
+#include "route/route.h"
 
 struct Request
 {
-    Destination destination = Destination::NONE;
-    Date departure_date{};
     float cargo_weight{};
+    Date departure_date{};
+    Date arrival_date{};
+    Route *target_route{};
+    Destination destination = Destination::NONE;
     TruckBrand truck_brand = TruckBrand::NONE;
 };
 

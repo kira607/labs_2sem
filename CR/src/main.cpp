@@ -28,15 +28,53 @@ int main(int argc, char *argv[])
         RequestLoader rl;
         Request request = rl.Load(argv[1]);
 
-        const Route *target_route = route_db.Find(request.destination);
+        std::time_t now_time = std::time(nullptr);
+        Date now = Date(now_time);
+        now.SetFromTime(now.time + 1000 * 60 * 60);
+        std::cout << now.String() << "\n";
 
+        schedule_db.Update(&now);
+
+        std::cout << request.departure_date.time << " < " << now.time << "\n";
+        if(request.departure_date.time <= now.time)
+        {
+            std::cerr << "reqested departure date has past!\n";
+            return 100;
+        }
+
+        Route *target_route = route_db.Find(request.destination);
         int full_delivery_time = target_route->target_time_in_transit * 2 + target_route->loading_time;
+        request.target_route = target_route;
 
         Delivery delivery = Delivery(request.departure_date.time, full_delivery_time);
+        request.arrival_date = Date(delivery.end);
 
-        truck_db.list.PrintAll();
+        Truck *truck = truck_db.Find(&request);
+        if(!truck)
+        {
+            return 120;
+        }
+        std::cout << "truck id:" << truck->id << "\n";
+        delivery.truck_id = truck->id;
 
-        Truck *truck = truck_db.Find(request.truck_brand, request.cargo_weight, target_route->distance);
+        int *drivers_ids = driver_db.Find(&request);
+        if(!drivers_ids)
+        {
+            return 121;
+        }
+
+        std::cout << "drivers ids: ";
+        for(int i = 0; i < request.target_route->drivers; ++i)
+        {
+            std::cout << drivers_ids[i] << ";";
+        }
+        std::cout << "\n";
+        delivery.drivers = request.target_route->drivers;
+        delivery.drivers_ids = drivers_ids;
+
+        schedule_db.Add(&delivery);
+
+        
 
         // Truck DB find by request.truck_brand, request.cargo_weight, target_route->distance
 

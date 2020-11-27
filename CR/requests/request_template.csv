@@ -1,2 +1,2 @@
-маршрут,дата выезда,масса груза,пожелание по марке грузовика
-3,25.01.2021,4,7
+destination,departure_date,cargo_weight,truck_brand
+<1-5>,dd.mm.yyyy HH:MM,<0-8> (float),<1-10>

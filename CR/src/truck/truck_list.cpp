@@ -93,7 +93,8 @@ void TruckList::Print(int index) const
 {
     _check_index(index);
     auto p = Get(index);
-    std::cout << str(p->brand) << " "
+    std::cout << p-> id << " "
+              << str(p->brand) << " "
               << p->capacity << " "
               << p->transportation_distance << " "
               << p->mileage_per_day << "\n";

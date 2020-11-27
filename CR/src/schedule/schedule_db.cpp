@@ -6,24 +6,62 @@ ScheduleDataBase::ScheduleDataBase(const std::string &db_path_)
     _loadDataBase();
 }
 
-bool ScheduleDataBase::IsFree(Truck *truck) const
+bool ScheduleDataBase::IsFree(Truck *truck, Request *request) const
 {
     Delivery *pDelivery = list.head;
     while(pDelivery)
     {
+        if(pDelivery->truck_id == truck->id)
+        {
+            if(_isIntersection(pDelivery, request))
+            {
+                return false;
+            }
+        }
         pDelivery = pDelivery->next;
     }
-    return false;
+    return true;
 }
     
-bool ScheduleDataBase::IsFree(Driver *driver) const
+bool ScheduleDataBase::IsFree(Driver *driver, Request *request) const
 {
     Delivery *pDelivery = list.head;
     while(pDelivery)
     {
+        for(int i = 0; i < pDelivery->drivers; ++i)
+        {
+            if(pDelivery->drivers_ids[i] == driver->id)
+            {
+                if(_isIntersection(pDelivery, request))
+                {
+                    return false;
+                }
+            }
+        }
         pDelivery = pDelivery->next;
     }
-    return false;
+    return true;
+}
+
+void ScheduleDataBase::Update(Date *date)
+{
+    Delivery *pDelivery = list.head;
+    int index = 0;
+    while(pDelivery)
+    {
+        Delivery *next = pDelivery->next;
+        if(pDelivery->end < date->time) // if delivery has ended
+            list.Delete(index);
+        pDelivery = next;
+        ++index;
+    }
+    _updateDbFile();
+}
+
+void ScheduleDataBase::Add(Delivery *delivery)
+{
+    list.Add(*delivery);
+    _updateDbFile();
 }
 
 void ScheduleDataBase::Exit()
@@ -45,6 +83,26 @@ void ScheduleDataBase::_loadDataBase()
     }
 }
 
+void ScheduleDataBase::_updateDbFile()
+{
+    std::ofstream fout(db_path, std::ios_base::trunc);
+    fout << "start,end,truck_id,drivers_ids\n";
+
+    Delivery *pDelivery = list.head;
+    while(pDelivery)
+    {
+        fout << pDelivery->start << ","
+             << pDelivery->end << ","
+             << pDelivery->truck_id << ",";
+        for(int i = 0; i < pDelivery->drivers; ++i)
+        {
+            fout << pDelivery->drivers_ids[i] << " ";
+        }
+        fout << "\n";
+        pDelivery = pDelivery->next;
+    }
+}
+
 int *ScheduleDataBase::_parseDriversIdsStr(const std::string &drivers_ids_str, int &drivers_count)
 {
     drivers_count = 0;
@@ -58,4 +116,18 @@ int *ScheduleDataBase::_parseDriversIdsStr(const std::string &drivers_ids_str, i
         drivers_ids = (int*)realloc(drivers_ids, sizeof(int) * (drivers_count + 1));
     }
     return drivers_ids;
+}
+
+bool ScheduleDataBase::_isIntersection(Delivery *delivery, Request *request)
+{
+    int a1 = request->departure_date.time;
+    int a2 = request->arrival_date.time;
+    int b1 = delivery->start;
+    int b2 = delivery->end;
+
+    if(a1 < b1 && a2 < b1)
+        return false;
+    if(a1 > b2 && a2 > b2)
+        return false;
+    return true;
 }

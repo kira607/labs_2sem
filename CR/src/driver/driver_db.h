@@ -6,6 +6,7 @@
 
 #include "driver_list.h"
 #include "../schedule/schedule_db.h"
+#include "../request.h"
 
 struct DriverDataBase
 {
@@ -14,6 +15,8 @@ struct DriverDataBase
     ScheduleDataBase &schedule;
 
     explicit DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/driverdb.csv");
+
+    int *Find(Request *request);
 
     void Exit();
 
