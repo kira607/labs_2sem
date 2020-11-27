@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    ScheduleDataBase schedule_db = ScheduleDataBase("../dbs/scheduledb.csv");
+    ScheduleDataBase schedule_db = ScheduleDataBase();
     TruckDataBase truck_db = TruckDataBase(schedule_db);
     DriverDataBase driver_db = DriverDataBase(schedule_db);
     RouteDataBase route_db = RouteDataBase();
