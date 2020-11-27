@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_DRIVER_H
 #define COURSEWORK_DRIVER_H
 
-#include "../truck_brand.h"
+#include "../common/truck_brand.h"
 
 struct Driver
 {

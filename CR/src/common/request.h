@@ -5,12 +5,12 @@
 #include <string>
 
 #define CSV_IO_NO_THREAD
-#include "../fast-cpp-csv-parser/csv.h"
+#include "../../fast-cpp-csv-parser/csv.h"
 
 #include "destination.h"
 #include "truck_brand.h"
 #include "date.h"
-#include "route/route.h"
+#include "../route/route.h"
 
 struct Request
 {
@@ -26,15 +26,6 @@ struct RequestLoader
 {
     Request request;
     Request Load(const std::string &file_name);
-};
-
-struct RequestHandler
-{
-    Request request;
-    std::string request_path;
-
-    explicit RequestHandler(const std::string &file_path);
-    void Run();
 };
 
 #endif //COURSEWORK_REQUEST_H

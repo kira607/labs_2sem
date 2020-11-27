@@ -1,8 +1,8 @@
 #include "truck_db.h"
 
-TruckDataBase::TruckDataBase(ScheduleDataBase &schedule, const std::string &db_path_):
-schedule(schedule)
+TruckDataBase::TruckDataBase(ScheduleDataBase *schedule_p, const std::string &db_path_)
 {
+    schedule = schedule_p;
     db_path = db_path_;
     _loadDataBase();
 }
@@ -35,7 +35,7 @@ Truck *TruckDataBase::Find(Request *request) const
             (pTruck->brand != request->truck_brand) ||
             (pTruck->capacity < request->cargo_weight) || 
             (pTruck->transportation_distance < request->target_route->distance) ||
-            (!schedule.IsFree(pTruck, request))
+            (!schedule->IsFree(pTruck, request))
         )
         {
             pTruck = pTruck->next;

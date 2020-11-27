@@ -1,8 +1,8 @@
 #include "driver_db.h"
 
-DriverDataBase::DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_)
-:schedule(schedule_ref)
+DriverDataBase::DriverDataBase(ScheduleDataBase *schedule_p, const std::string &db_path_)
 {
+    schedule = schedule_p;
     db_path = db_path_;
     _loadDataBase();
 }
@@ -34,7 +34,7 @@ int *DriverDataBase::Find(Request *request)
     while(pDriver)
     {
         if((request->truck_brand != pDriver->truck_brand) ||
-           (!schedule.IsFree(pDriver, request))
+           (!schedule->IsFree(pDriver, request))
         )
         {
             pDriver = pDriver->next;

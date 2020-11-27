@@ -40,23 +40,37 @@ set(ROUTE
     src/route/route_db.h
 )
 
-set(COMMON  
-    src/main.cpp 
-    src/truck_brand.cpp
-    src/truck_brand.h 
-    src/destination.cpp 
-    src/destination.h 
-    src/date.cpp 
-    src/date.h 
-    src/request.cpp 
-    src/request.h
+set(REQUEST_HANDLER
+    src/request_handler/request_handler.cpp
+    src/request_handler/request_handler.h
 )
+
+set(ADMIN
+    src/admin/
+)
+
+set(COMMON
+    src/main.cpp
+    src/common/truck_brand.cpp
+    src/common/truck_brand.h
+    src/common/destination.cpp
+    src/common/destination.h
+    src/common/date.cpp
+    src/common/date.h
+    src/common/request.cpp
+    src/common/request.h
+    src/common/dbs.cpp
+    src/common/dbs.h
+    src/libs.h
+    src/libdb.h
+        src/admin/sha256/sha256.cpp src/admin/sha256/sha256.h)
 
 set(SOURCE_FILES
     ${TRUCK}
     ${ROUTE}
     ${DRIVER}
     ${SCHEDULE}
+    ${REQUEST_HANDLER}
     ${COMMON}
 )
 

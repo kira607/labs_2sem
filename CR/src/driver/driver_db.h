@@ -2,19 +2,20 @@
 #define COURSEWORK_DRIVER_DB_H
 
 #define CSV_IO_NO_THREAD
-#include "../../fast-cpp-csv-parser/csv.h"
 
+#include "../../fast-cpp-csv-parser/csv.h"
 #include "driver_list.h"
 #include "../schedule/schedule_db.h"
-#include "../request.h"
+#include "../common/request.h"
 
 struct DriverDataBase
 {
     DriverList list{};
-    std::string db_path;
-    ScheduleDataBase &schedule;
+    std::string db_path{};
+    ScheduleDataBase *schedule{};
 
-    explicit DriverDataBase(ScheduleDataBase &schedule_ref, const std::string &db_path_ = "../dbs/driverdb.csv");
+    DriverDataBase() = default;
+    explicit DriverDataBase(ScheduleDataBase *schedule_p, const std::string &db_path_ = "../dbs/driverdb.csv");
 
     void PrintAll() const;
     void Print(int index) const;

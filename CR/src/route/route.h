@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_ROUTE_H
 #define COURSEWORK_ROUTE_H
 
-#include "../destination.h"
+#include "../common/destination.h"
 
 struct Route
 {

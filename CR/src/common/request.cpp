@@ -20,15 +20,3 @@ Request RequestLoader::Load(const std::string &file_name)
     }
     return request;
 }
-
-RequestHandler::RequestHandler(const std::string &file_path)
-{
-    request_path = file_path;
-}
-
-void RequestHandler::Run()
-{
-    RequestLoader rl;
-    request = rl.Load(request_path);
-    //find
-}
