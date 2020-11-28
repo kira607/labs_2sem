@@ -8,7 +8,6 @@ struct Truck
     int id;
     float capacity;
     int transportation_distance;
-    int mileage_per_day;
     TruckBrand brand;
 
     Truck *prev;

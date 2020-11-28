@@ -6,6 +6,7 @@
 struct Route
 {
     Destination destination;
+    int id;
     int distance;
     int loading_time;
     int drivers;

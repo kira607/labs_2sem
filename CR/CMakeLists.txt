@@ -50,8 +50,8 @@ set(ADMIN
     src/admin/sha256/sha256.h
     src/admin/administrator_console.cpp
     src/admin/administrator_console.h
-    src/admin/input.cpp
-    src/admin/input.h
+        src/common/input.cpp
+        src/common/input.h
         )
 
 set(COMMON

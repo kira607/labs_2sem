@@ -2,6 +2,7 @@
 
 Route::Route()
 {
+    id = -1;
     destination = Destination::NONE;
     distance = 0;
     loading_time = 0;
@@ -14,6 +15,7 @@ Route::Route()
 
 Route::Route(const Route &route)
 {
+    id = route.id;
     destination = route.destination;
     distance = route.distance;
     loading_time = route.loading_time;

@@ -3,9 +3,13 @@
 
 #define CSV_IO_NO_THREAD
 
+#include <iomanip>
+#include <fstream>
+
 #include "../../../fast-cpp-csv-parser/csv.h"
 #include "route_list.h"
 #include "../../common/destination.h"
+#include "../../common/input.h"
 
 struct RouteDataBase
 {
@@ -20,10 +24,13 @@ struct RouteDataBase
     [[nodiscard]] Route *Find(Destination destination) const;
 
     void Edit(int index);
+    void Add();
+    void Delete(int index);
 
     void Exit();
 
     void _loadDataBase();
+    void _updateDbFile();
 };
 
 #endif //COURSEWORK_ROUTE_DB_H

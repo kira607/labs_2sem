@@ -77,7 +77,7 @@ bool AdministratorConsole::_verifyPassword() const
     return hashed_password == real_password;
 }
 
-int AdministratorConsole::_mainMenu()
+int AdministratorConsole::_mainMenu() const
 {
     while(true)
     {
@@ -87,7 +87,7 @@ int AdministratorConsole::_mainMenu()
         std::cout << "3 Route" << "\n";
         std::cout << "0 Exit" << "\n";
 
-        int option = Input("Input: ", 0, 3);
+        int option = InputInt("Input: ");
         switch (option)
         {
             case 1: _truckMenu(); break;
@@ -99,75 +99,87 @@ int AdministratorConsole::_mainMenu()
     }
 }
 
-void AdministratorConsole::_truckMenu()
+void AdministratorConsole::_truckMenu() const
 {
     while(true)
     {
         std::cout << "Truck Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
+        std::cout << "3 Add" << "\n";
+        std::cout << "3 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
-        int option = Input("Input: ", 0, 2);
+        int option = InputInt("Input: ");
         switch (option)
         {
             case 1: dbs->truck_db.PrintAll(); break;
             case 2:
             {
-                int index = Input("Choose item by index: ", 1, dbs->truck_db.list.size);
-                dbs->truck_db.Edit(index - 1);
+                int index = InputInt("Choose item by index: ", 0, dbs->truck_db.list.size-1);
+                dbs->truck_db.Edit(index);
                 break;
             }
+            case 3: dbs->truck_db.Add(); break;
+            case 4: dbs->truck_db.Delete(InputInt("Index: ")); break;
             case 0: return;
             default: std::cout << "\nIncorrect input\n\n";
         }
     }
 }
 
-void AdministratorConsole::_driverMenu()
+void AdministratorConsole::_driverMenu() const
 {
     while(true)
     {
         std::cout << "Truck Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
+        std::cout << "3 Add" << "\n";
+        std::cout << "3 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
-        int option = Input("Input: ", 0, 2);
+        int option = InputInt("Input: ");
         switch (option)
         {
             case 1: dbs->driver_db.PrintAll(); break;
             case 2:
             {
-                int index = Input("Choose item by index: ", 1, dbs->driver_db.list.size);
-                dbs->driver_db.Edit(index - 1);
+                int index = InputInt("Choose item by index: ", 0, dbs->driver_db.list.size-1);
+                dbs->driver_db.Edit(index);
                 break;
             }
+            case 3: dbs->truck_db.Add(); break;
+            case 4: dbs->truck_db.Delete(InputInt("Index: ")); break;
             case 0: return;
             default: std::cout << "\nIncorrect input\n\n";
         }
     }
 }
 
-void AdministratorConsole::_routeMenu()
+void AdministratorConsole::_routeMenu() const
 {
     while(true)
     {
         std::cout << "Truck Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
+        std::cout << "3 Add" << "\n";
+        std::cout << "3 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
-        int option = Input("Input: ", 0, 2);
+        int option = InputInt("Input: ");
         switch (option)
         {
             case 1: dbs->route_db.PrintAll(); break;
             case 2:
             {
-                int index = Input("Choose item by index: ", 1, dbs->route_db.list.size);
-                dbs->route_db.Edit(index - 1);
+                int index = InputInt("Choose item by index: ", 0, dbs->route_db.list.size-1);
+                dbs->route_db.Edit(index);
                 break;
             }
+            case 3: dbs->truck_db.Add(); break;
+            case 4: dbs->truck_db.Delete(InputInt("Index: ")); break;
             case 0: return;
             default: std::cout << "\nIncorrect input\n\n";
         }

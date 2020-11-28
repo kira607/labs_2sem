@@ -10,7 +10,7 @@
 
 #include "sha256/sha256.h"
 #include "../common/dbs.h"
-#include "input.h"
+#include "../common/input.h"
 
 struct AdministratorConsole
 {
@@ -33,10 +33,10 @@ struct AdministratorConsole
     [[nodiscard]] bool _verifyPassword() const;
 
     //Menu
-    int _mainMenu();
-    void _truckMenu();
-    void _driverMenu();
-    void _routeMenu();
+    int _mainMenu() const;
+    void _truckMenu() const;
+    void _driverMenu() const;
+    void _routeMenu() const;
 };
 
 #endif //COURSEWORK_ADMINISTRATOR_CONSOLE_H
