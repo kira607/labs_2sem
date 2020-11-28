@@ -46,7 +46,10 @@ set(REQUEST_HANDLER
 )
 
 set(ADMIN
-    src/admin/
+    src/admin/sha256/sha256.cpp
+    src/admin/sha256/sha256.h
+    src/admin/administrator_console.cpp
+    src/admin/administrator_console.h
 )
 
 set(COMMON
@@ -63,7 +66,7 @@ set(COMMON
     src/common/dbs.h
     src/libs.h
     src/libdb.h
-        src/admin/sha256/sha256.cpp src/admin/sha256/sha256.h)
+)
 
 set(SOURCE_FILES
     ${TRUCK}
@@ -72,6 +75,7 @@ set(SOURCE_FILES
     ${SCHEDULE}
     ${REQUEST_HANDLER}
     ${COMMON}
+    ${ADMIN}
 )
 
 add_executable(CourseWork ${SOURCE_FILES})

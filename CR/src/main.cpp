@@ -6,8 +6,8 @@ int main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        // Administrator console
-        return 0;
+        AdministratorConsole ac{};
+        return ac.Run();
     }
     else if (argc == 2)
     {
@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
         return rh.Run();
     }
 
-    std::cerr << "Unexpected argument count\n";
+    std::cerr << "Unexpected arguments count\n";
     return 255;
 }

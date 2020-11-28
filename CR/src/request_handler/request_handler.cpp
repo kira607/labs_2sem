@@ -22,9 +22,9 @@ int RequestHandler::Run()
     }
 
     Route *target_route = dbs->route_db.Find(request.destination);
-    int full_delivery_time = target_route->target_time_in_transit * 2 + target_route->loading_time;
     request.target_route = target_route;
 
+    int full_delivery_time = target_route->target_time_in_transit * 2 + target_route->loading_time;
     Delivery delivery = Delivery(request.departure_date.time, full_delivery_time);
     request.arrival_date = Date(delivery.end);
 
