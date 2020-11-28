@@ -81,7 +81,7 @@ int AdministratorConsole::_mainMenu() const
 {
     while(true)
     {
-        std::cout << "Choose Data Base" << "\n";
+        std::cout << "\nChoose Data Base" << "\n";
         std::cout << "1 Truck" << "\n";
         std::cout << "2 Driver" << "\n";
         std::cout << "3 Route" << "\n";
@@ -103,11 +103,11 @@ void AdministratorConsole::_truckMenu() const
 {
     while(true)
     {
-        std::cout << "Truck Data Base" << "\n";
+        std::cout << "\nTruck Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
         std::cout << "3 Add" << "\n";
-        std::cout << "3 Delete" << "\n";
+        std::cout << "4 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
         int option = InputInt("Input: ");
@@ -132,11 +132,11 @@ void AdministratorConsole::_driverMenu() const
 {
     while(true)
     {
-        std::cout << "Truck Data Base" << "\n";
+        std::cout << "\nDriver Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
         std::cout << "3 Add" << "\n";
-        std::cout << "3 Delete" << "\n";
+        std::cout << "4 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
         int option = InputInt("Input: ");
@@ -149,8 +149,8 @@ void AdministratorConsole::_driverMenu() const
                 dbs->driver_db.Edit(index);
                 break;
             }
-            case 3: dbs->truck_db.Add(); break;
-            case 4: dbs->truck_db.Delete(InputInt("Index: ")); break;
+            case 3: dbs->driver_db.Add(); break;
+            case 4: dbs->driver_db.Delete(InputInt("Index: ")); break;
             case 0: return;
             default: std::cout << "\nIncorrect input\n\n";
         }
@@ -161,11 +161,11 @@ void AdministratorConsole::_routeMenu() const
 {
     while(true)
     {
-        std::cout << "Truck Data Base" << "\n";
+        std::cout << "\nRoute Data Base" << "\n";
         std::cout << "1 Print all" << "\n";
         std::cout << "2 Edit" << "\n";
         std::cout << "3 Add" << "\n";
-        std::cout << "3 Delete" << "\n";
+        std::cout << "4 Delete" << "\n";
         std::cout << "0 Exit" << "\n";
 
         int option = InputInt("Input: ");
@@ -178,8 +178,8 @@ void AdministratorConsole::_routeMenu() const
                 dbs->route_db.Edit(index);
                 break;
             }
-            case 3: dbs->truck_db.Add(); break;
-            case 4: dbs->truck_db.Delete(InputInt("Index: ")); break;
+            case 3: dbs->route_db.Add(); break;
+            case 4: dbs->route_db.Delete(InputInt("Index: ")); break;
             case 0: return;
             default: std::cout << "\nIncorrect input\n\n";
         }

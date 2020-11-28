@@ -32,7 +32,7 @@ struct DriverDataBase
     void Exit();
 
     void _loadDataBase();
-    void _updateDbFile();
+    void _updateDbFile() const;
 };
 
 #endif //COURSEWORK_DRIVER_DB_H

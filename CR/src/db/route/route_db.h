@@ -30,7 +30,7 @@ struct RouteDataBase
     void Exit();
 
     void _loadDataBase();
-    void _updateDbFile();
+    void _updateDbFile() const;
 };
 
 #endif //COURSEWORK_ROUTE_DB_H

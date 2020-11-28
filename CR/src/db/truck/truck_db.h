@@ -32,7 +32,7 @@ struct TruckDataBase
     void Exit();
 
     void _loadDataBase();
-    void _updateDbFile();
+    void _updateDbFile() const;
 };
 
 #endif //COURSEWORK_TRUCK_DB_H

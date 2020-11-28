@@ -107,11 +107,13 @@ void DriverDataBase::Add()
     new_element.patronymic = InputStr("patronymic: ");
     new_element.truck_brand = InputTB("truck brand: ");
     list.Add(new_element);
+    _updateDbFile();
 }
 
 void DriverDataBase::Delete(int index)
 {
     list.Delete(index);
+    _updateDbFile();
 }
 
 void DriverDataBase::Exit()
@@ -133,7 +135,7 @@ void DriverDataBase::_loadDataBase()
     }
 }
 
-void DriverDataBase::_updateDbFile()
+void DriverDataBase::_updateDbFile() const
 {
     std::ofstream fout(db_path, std::ios_base::trunc);
     fout << "id,name,surname,patronymic,brand_code\n";

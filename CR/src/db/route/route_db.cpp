@@ -99,11 +99,13 @@ void RouteDataBase::Add()
     new_element.drivers = InputInt("drivers: ");
     new_element.target_time_in_transit = InputInt("time in transit: ");
     list.Add(new_element);
+    _updateDbFile();
 }
 
 void RouteDataBase::Delete(int index)
 {
     list.Delete(index);
+    _updateDbFile();
 }
 
 void RouteDataBase::Exit()
@@ -127,7 +129,7 @@ void RouteDataBase::_loadDataBase()
     }
 }
 
-void RouteDataBase::_updateDbFile()
+void RouteDataBase::_updateDbFile() const
 {
     std::ofstream fout(db_path, std::ios_base::trunc);
     fout << "id,destination_code,distance,loading_time,drivers,time_in_transit\n";

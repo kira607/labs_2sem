@@ -93,11 +93,13 @@ void TruckDataBase::Add()
     new_element.capacity = InputInt("capacity: ");
     new_element.transportation_distance = InputInt("transportation distance: ");
     list.Add(new_element);
+    _updateDbFile();
 }
 
 void TruckDataBase::Delete(int index)
 {
     list.Delete(index);
+    _updateDbFile();
 }
 
 void TruckDataBase::Exit()
@@ -119,7 +121,7 @@ void TruckDataBase::_loadDataBase()
     }
 }
 
-void TruckDataBase::_updateDbFile()
+void TruckDataBase::_updateDbFile() const
 {
     std::ofstream fout(db_path, std::ios_base::trunc);
     fout << "id,brand,capacity,transportation_distance\n";
