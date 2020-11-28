@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 
     if (argc == 1)
     {
-        AdministratorConsole ac{};
+        AdministratorConsole ac{&dbs};
         return ac.Run();
     }
     else if (argc == 2)

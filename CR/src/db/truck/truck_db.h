@@ -3,9 +3,9 @@
 
 #define CSV_IO_NO_THREAD
 
-#include "../../fast-cpp-csv-parser/csv.h"
+#include "../../../fast-cpp-csv-parser/csv.h"
 #include "truck_list.h"
-#include "../common/request.h"
+#include "../../common/request.h"
 #include "../schedule/schedule_db.h"
 
 struct TruckDataBase
@@ -21,6 +21,8 @@ struct TruckDataBase
     void Print(int index) const;
     
     [[nodiscard]] Truck *Find(Request *request) const;
+
+    void Edit(int index);
 
     void Exit();
 

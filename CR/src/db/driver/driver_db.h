@@ -3,10 +3,10 @@
 
 #define CSV_IO_NO_THREAD
 
-#include "../../fast-cpp-csv-parser/csv.h"
+#include "../../../fast-cpp-csv-parser/csv.h"
 #include "driver_list.h"
 #include "../schedule/schedule_db.h"
-#include "../common/request.h"
+#include "../../common/request.h"
 
 struct DriverDataBase
 {
@@ -20,7 +20,9 @@ struct DriverDataBase
     void PrintAll() const;
     void Print(int index) const;
     
-    int *Find(Request *request);
+    int *Find(Request *request) const;
+
+    void Edit(int index);
 
     void Exit();
 

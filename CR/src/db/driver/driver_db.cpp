@@ -26,7 +26,7 @@ void DriverDataBase::Print(int index) const
               << str(p->truck_brand) << "\n";
 }
 
-int *DriverDataBase::Find(Request *request)
+int *DriverDataBase::Find(Request *request) const
 {
     Driver *pDriver = list.head;
     int *drivers_ids = new int[request->target_route->drivers];
@@ -50,6 +50,11 @@ int *DriverDataBase::Find(Request *request)
         return drivers_ids;
     }
     return nullptr;
+}
+
+void DriverDataBase::Edit(int index)
+{
+    list._check_index(index);
 }
 
 void DriverDataBase::Exit()

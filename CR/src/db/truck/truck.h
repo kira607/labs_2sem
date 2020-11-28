@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_TRUCK_H
 #define COURSEWORK_TRUCK_H
 
-#include "../common/truck_brand.h"
+#include "../../common/truck_brand.h"
 
 struct Truck
 {

@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_LIBS_H
 #define COURSEWORK_LIBS_H
 
-#include "libdb.h"
+#include "db/libdb.h"
 
 #include "request_handler/request_handler.h"
 #include "admin/administrator_console.h"

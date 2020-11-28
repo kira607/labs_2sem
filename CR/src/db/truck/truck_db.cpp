@@ -46,6 +46,11 @@ Truck *TruckDataBase::Find(Request *request) const
     return nullptr;
 }
 
+void TruckDataBase::Edit(int index)
+{
+    list._check_index(index);
+}
+
 void TruckDataBase::Exit()
 {
     list.Free();
@@ -64,3 +69,5 @@ void TruckDataBase::_loadDataBase()
         list.Add(truck);
     }
 }
+
+

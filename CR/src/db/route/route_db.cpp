@@ -37,6 +37,11 @@ Route *RouteDataBase::Find(Destination destination) const
     return nullptr;
 }
 
+void RouteDataBase::Edit(int index)
+{
+    list._check_index(index);
+}
+
 void RouteDataBase::Exit()
 {
     list.Free();

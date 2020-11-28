@@ -3,9 +3,9 @@
 
 #define CSV_IO_NO_THREAD
 
-#include "../../fast-cpp-csv-parser/csv.h"
+#include "../../../fast-cpp-csv-parser/csv.h"
 #include "route_list.h"
-#include "../common/destination.h"
+#include "../../common/destination.h"
 
 struct RouteDataBase
 {
@@ -18,6 +18,8 @@ struct RouteDataBase
     void Print(int index) const;
     
     [[nodiscard]] Route *Find(Destination destination) const;
+
+    void Edit(int index);
 
     void Exit();
 

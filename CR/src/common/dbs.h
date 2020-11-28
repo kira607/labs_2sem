@@ -1,7 +1,7 @@
 #ifndef COURSEWORK_DBS_H
 #define COURSEWORK_DBS_H
 
-#include "../libdb.h"
+#include "../db/libdb.h"
 
 struct DataBases
 {
