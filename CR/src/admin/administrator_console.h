@@ -28,15 +28,17 @@ struct AdministratorConsole
 
     // Password
     void _loadRealPassword();
+    void _uploadPassword() const;
     static int _getch();
     void _inputPassword(const std::string &prompt, bool show_asterisk=true);
     [[nodiscard]] bool _verifyPassword() const;
 
     //Menu
-    int _mainMenu() const;
+    [[nodiscard]] int _mainMenu();
     void _truckMenu() const;
     void _driverMenu() const;
     void _routeMenu() const;
+    void _changePassword();
 };
 
 #endif //COURSEWORK_ADMINISTRATOR_CONSOLE_H

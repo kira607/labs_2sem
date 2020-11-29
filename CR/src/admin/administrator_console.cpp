@@ -29,10 +29,21 @@ void AdministratorConsole::_loadRealPassword()
     fin >> real_password;
 }
 
+void AdministratorConsole::_uploadPassword() const
+{
+    std::ofstream fout("../.pass", std::ios_base::trunc);
+
+    if(!fout)
+    {
+        std::cerr << ".pass does not exist!\n";
+    }
+    fout << real_password;
+}
+
 int AdministratorConsole::_getch()
 {
     int ch;
-    termios t_old, t_new;
+    struct termios t_old{}, t_new{};
 
     tcgetattr(STDIN_FILENO, &t_old);
     t_new = t_old;
@@ -47,18 +58,19 @@ int AdministratorConsole::_getch()
 
 void AdministratorConsole::_inputPassword(const std::string &prompt, bool show_asterisk)
 {
+    if(!password.empty()) password.clear();
     std::cout << prompt;
 
     unsigned char ch=0;
-    while((ch=_getch())!=RETURN)
+    while((ch = _getch()) != RETURN)
     {
-        if(ch==BACKSPACE)
+        if(ch == BACKSPACE)
         {
             if(password.length()!=0)
             {
                 if(show_asterisk)
                     std::cout << "\b \b";
-                password.resize(password.length()-1);
+                password.resize(password.length() - 1);
             }
         }
         else
@@ -74,17 +86,19 @@ void AdministratorConsole::_inputPassword(const std::string &prompt, bool show_a
 bool AdministratorConsole::_verifyPassword() const
 {
     std::string hashed_password = sha256(password);
+    std::cout << password << " = " << hashed_password << "\n" << real_password << "\n";
     return hashed_password == real_password;
 }
 
-int AdministratorConsole::_mainMenu() const
+int AdministratorConsole::_mainMenu()
 {
     while(true)
     {
         std::cout << "\nChoose Data Base" << "\n";
-        std::cout << "1 Truck" << "\n";
-        std::cout << "2 Driver" << "\n";
-        std::cout << "3 Route" << "\n";
+        std::cout << "1 Choose Truck Data Base" << "\n";
+        std::cout << "2 Choose Driver Data Base" << "\n";
+        std::cout << "3 Choose Route Data Base" << "\n";
+        std::cout << "4 Change password\n";
         std::cout << "0 Exit" << "\n";
 
         int option = InputInt("Input: ");
@@ -93,6 +107,7 @@ int AdministratorConsole::_mainMenu() const
             case 1: _truckMenu(); break;
             case 2: _driverMenu(); break;
             case 3: _routeMenu(); break;
+            case 4: _changePassword(); break;
             case 0: return 0;
             default: std::cout << "\nIncorrect input\n\n";
         }
@@ -184,4 +199,19 @@ void AdministratorConsole::_routeMenu() const
             default: std::cout << "\nIncorrect input\n\n";
         }
     }
+}
+
+void AdministratorConsole::_changePassword()
+{
+    _inputPassword("Old password: ");
+    if(!_verifyPassword())
+    {
+        std::cerr << "Invalid password!\n";
+        return;
+    }
+    _inputPassword("New Password: ");
+    std::string hashed_password = sha256(password);
+    real_password = hashed_password;
+    _uploadPassword();
+    std::cout << "Password changed\n";
 }
