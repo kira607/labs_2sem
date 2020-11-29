@@ -86,7 +86,6 @@ void AdministratorConsole::_inputPassword(const std::string &prompt, bool show_a
 bool AdministratorConsole::_verifyPassword() const
 {
     std::string hashed_password = sha256(password);
-    std::cout << password << " = " << hashed_password << "\n" << real_password << "\n";
     return hashed_password == real_password;
 }
 
