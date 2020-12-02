@@ -11,6 +11,7 @@ struct DataBases
     RouteDataBase route_db;
 
     DataBases();
+    void CloseAll();
 };
 
 #endif //COURSEWORK_DBS_H

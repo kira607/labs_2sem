@@ -11,3 +11,11 @@ DataBases::DataBases()
     driver_db = DriverDataBase(&schedule_db);
     route_db = RouteDataBase();
 }
+
+void DataBases::CloseAll()
+{
+    schedule_db.Exit();
+    truck_db.Exit();
+    driver_db.Exit();
+    route_db.Exit();
+}

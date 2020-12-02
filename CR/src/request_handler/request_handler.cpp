@@ -55,6 +55,8 @@ int RequestHandler::Run()
 
     dbs->schedule_db.Add(&delivery);
 
+    dbs->CloseAll();
+
     return 0;
 }
 

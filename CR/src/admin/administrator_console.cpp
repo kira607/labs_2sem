@@ -107,7 +107,7 @@ int AdministratorConsole::_mainMenu()
             case 2: _driverMenu(); break;
             case 3: _routeMenu(); break;
             case 4: _changePassword(); break;
-            case 0: return 0;
+            case 0: dbs->CloseAll(); return 0;
             default: std::cout << "\nIncorrect input\n\n";
         }
     }
