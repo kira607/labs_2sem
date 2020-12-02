@@ -50,9 +50,9 @@ set(ADMIN
     src/admin/sha256/sha256.h
     src/admin/administrator_console.cpp
     src/admin/administrator_console.h
-        src/common/input.cpp
-        src/common/input.h
-        )
+    src/common/input.cpp
+    src/common/input.h
+)
 
 set(COMMON
     src/main.cpp
@@ -67,7 +67,7 @@ set(COMMON
     src/common/dbs.cpp
     src/common/dbs.h
     src/libs.h
-        src/db/libdb.h
+    src/db/libdb.h
 )
 
 set(SOURCE_FILES
