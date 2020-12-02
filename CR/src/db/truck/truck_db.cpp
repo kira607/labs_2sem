@@ -99,6 +99,10 @@ void TruckDataBase::Add()
 void TruckDataBase::Delete(int index)
 {
     list.Delete(index);
+    for(int i = index; i < list.size; ++i)
+    {
+        list.Get(i)->id = i;
+    }
     _updateDbFile();
 }
 
