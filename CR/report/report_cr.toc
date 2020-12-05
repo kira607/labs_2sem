@@ -1,0 +1,4 @@
+\babel@toc {russian}{}
+\contentsline {section}{\numberline {1}Введение}{7}%
+\contentsline {section}{\numberline {2}Внешние форматы хранения данных}{8}%
+\contentsline {section}{\numberline {3}Внутренние форматы хранения данных}{12}%
