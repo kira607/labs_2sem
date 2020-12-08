@@ -62,8 +62,7 @@ set(COMMON
     src/common/destination.h
     src/common/date.cpp
     src/common/date.h
-    src/common/request.cpp
-    src/common/request.h
+        src/common/request.h
     src/common/dbs.cpp
     src/common/dbs.h
     src/libs.h
