@@ -4,6 +4,7 @@
 #define CSV_IO_NO_THREAD
 
 #include <iomanip>
+#include <fstream>
 
 #include "../../../fast-cpp-csv-parser/csv.h"
 #include "driver_list.h"

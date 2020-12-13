@@ -3,6 +3,8 @@
 
 #define CSV_IO_NO_THREAD
 
+#include <fstream>
+
 #include "../../../fast-cpp-csv-parser/csv.h"
 #include "schedule.h"
 #include "../driver/driver.h"
