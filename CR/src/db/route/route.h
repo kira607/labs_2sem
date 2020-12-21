@@ -16,7 +16,7 @@ struct Route
     Route *next;
 
     Route();
-    Route(const Route &driver);
+    Route(const Route &route);
 };
 
 #endif //COURSEWORK_ROUTE_H
