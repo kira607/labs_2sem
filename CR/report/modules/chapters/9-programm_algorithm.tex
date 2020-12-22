@@ -1,1 +1,17 @@
-\section*{Алгоритм программы}
+\section{Алгоритм программы}
+
+\begin{itemize}
+    \item \verb|DataBases dbs{};|
+    \item Если \verb|argc == 1|
+    \begin{itemize}
+        \item \verb|AdministratorConsole ac{&dbs};|
+        \item \verb|return ac.Run();|
+    \end{itemize}
+    \item Если \verb|argc == 2|
+    \begin{itemize}
+        \item \verb|RequestHandler rh{argv[1], &dbs};|
+        \item \verb|return rh.Run();|
+    \end{itemize}
+    \item \verb|std::cerr << "Unexpected arguments count\n";|
+    \item \verb|return 255;|
+\end{itemize}
