@@ -3,20 +3,30 @@
 \subsubsection{Truck}
 
 \begin{lstlisting}
-    lst
+    Truck();
 \end{lstlisting}
 
 \begin{itemize}
-    \item \verb||
+    \item \verb|id = -1;|
+    \item \verb|brand = TruckBrand::NONE;|
+    \item \verb|capacity = 0.f;|
+    \item \verb|transportation_distance = 0;|
+    \item \verb|prev = nullptr;|
+    \item \verb|next = nullptr;|
 \end{itemize}
 
 \subsubsection{Truck}
 
 \begin{lstlisting}
-    lst
+    Truck(const Truck &truck);
 \end{lstlisting}
 
 \begin{itemize}
-    \item \verb||
+    \item \verb|id = truck.id;|
+    \item \verb|brand = truck.brand;|
+    \item \verb|capacity = truck.capacity;|
+    \item \verb|transportation_distance = truck.transportation_distance;|
+    \item \verb|prev = nullptr;|
+    \item \verb|next = nullptr;|
 \end{itemize}
 
