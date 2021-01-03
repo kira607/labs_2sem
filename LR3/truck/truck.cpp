@@ -3,7 +3,7 @@
 Truck::Truck()
 {
     id = -1;
-    brand = TruckBrand::NONE;
+    brand = "";
     capacity = 0.f;
     transportation_distance = 0;
     prev = nullptr;

@@ -5,9 +5,11 @@
 
 #include <iomanip>
 #include <fstream>
+#include <filesystem>
 
-// #include "../../../fast-cpp-csv-parser/csv.h"
+#include "fast-cpp-csv-parser/csv.h"
 #include "truck_list.h"
+#include "../input.h"
 
 struct TruckDataBase
 {
@@ -16,7 +18,7 @@ struct TruckDataBase
     TruckDataBase() = default;
 
     void PrintAll() const;
-    void Print(int index) const;
+    void Print(int index, bool print_header = false) const;
 
     void Edit(int index);
     void Add();
@@ -24,8 +26,8 @@ struct TruckDataBase
 
     void Exit();
 
-    void _loadDataBase();
-    void _updateDbFile() const;
+    void Load(const std::string& db_path);
+    void Save(const std::string& db_path) const;
 };
 
 #endif //COURSEWORK_TRUCK_DB_H

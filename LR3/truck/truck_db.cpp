@@ -1,12 +1,5 @@
 #include "truck_db.h"
 
-TruckDataBase::TruckDataBase(ScheduleDataBase *schedule_p, const std::string &db_path_)
-{
-    schedule = schedule_p;
-    db_path = db_path_;
-    _loadDataBase();
-}
-
 void TruckDataBase::PrintAll() const
 {
     std::cout << std::left
@@ -20,35 +13,23 @@ void TruckDataBase::PrintAll() const
     }
 }
 
-void TruckDataBase::Print(int index) const
+void TruckDataBase::Print(int index, bool print_header) const
 {
     list._check_index(index);
     auto p = list.Get(index);
+    if(print_header)
+    {
+        std::cout << std::left
+                  << std::setw(4) << "id "
+                  << std::setw(14) << "brand "
+                  << std::setw(10) << "capacity "
+                  << std::setw(5) << "transportation_distance\n";
+    }
     std::cout << std::left
               << std::setw(3)  << p-> id << " "
-              << std::setw(13) << str(p->brand) << " "
+              << std::setw(13) << p->brand << " "
               << std::setw(9)  << p->capacity << " "
               << std::setw(5)  << p->transportation_distance << "\n";
-}
-
-Truck *TruckDataBase::Find(Request *request) const
-{
-    Truck *pTruck = list.head;
-    while(pTruck)
-    {
-        if(
-            (pTruck->brand != request->truck_brand) ||
-            (pTruck->capacity < request->cargo_weight) || 
-            (pTruck->transportation_distance < request->target_route->distance) ||
-            (!schedule->IsFree(pTruck, request))
-        )
-        {
-            pTruck = pTruck->next;
-            continue;
-        }
-        return pTruck;
-    }
-    return nullptr;
 }
 
 void TruckDataBase::Edit(int index)
@@ -66,20 +47,22 @@ void TruckDataBase::Edit(int index)
         std::cout << "3 distance" << "\n";
         std::cout << "0 Finish edit" << "\n";
 
-        int option = InputInt("Input: ");
+        int option;
+        Input(option, "CMD: ");
 
         switch (option)
         {
             case 1:
-                target_element->brand = InputTB("New value: ");
+                Input(target_element->brand, "New value: ");
                 break;
             case 2:
-                target_element->capacity = InputInt("New value: ");
+                Input(target_element->capacity, "New value: ");
                 break;
             case 3:
-                target_element->transportation_distance = InputInt("New value: ");
+                Input(target_element->transportation_distance, "New value: ");
                 break;
-            case 0: _updateDbFile(); return;
+            case 0:
+                return;
             default: std::cout << "\nIncorrect input\n\n";
         }
     }
@@ -88,12 +71,11 @@ void TruckDataBase::Edit(int index)
 void TruckDataBase::Add()
 {
     Truck new_element;
-    new_element.id = list.Get(list.size-1)->id + 1;
-    new_element.brand = InputTB("brand: ");
-    new_element.capacity = InputInt("capacity: ");
-    new_element.transportation_distance = InputInt("transportation distance: ");
+    new_element.id = list.size > 0 ? list.Get(list.size-1)->id + 1 : 0;
+    Input(new_element.brand, "brand: ");
+    Input(new_element.capacity, "capacity: ");
+    Input(new_element.transportation_distance, "transportation distance: ");
     list.Add(new_element);
-    _updateDbFile();
 }
 
 void TruckDataBase::Delete(int index)
@@ -103,7 +85,6 @@ void TruckDataBase::Delete(int index)
     {
         list.Get(i)->id = i;
     }
-    _updateDbFile();
 }
 
 void TruckDataBase::Exit()
@@ -111,22 +92,25 @@ void TruckDataBase::Exit()
     list.Free();
 }
 
-void TruckDataBase::_loadDataBase()
+void TruckDataBase::Load(const std::string& db_path)
 {
     Truck truck{};
 
     io::CSVReader<4> in(db_path);
     in.read_header(io::ignore_extra_column, "id", "brand", "capacity", "transportation_distance");
-    int brand_code;
-    while(in.read_row(truck.id, brand_code, truck.capacity, truck.transportation_distance))
+    while(in.read_row(truck.id, truck.brand, truck.capacity, truck.transportation_distance))
     {
-        truck.brand = static_cast<TruckBrand>(brand_code);
         list.Add(truck);
     }
 }
 
-void TruckDataBase::_updateDbFile() const
+void TruckDataBase::Save(const std::string& db_path) const
 {
+    if(std::filesystem::exists(db_path))
+    {
+        std::cout << "File '" << db_path << "' exists already\n";
+        return;
+    }
     std::ofstream fout(db_path, std::ios_base::trunc);
     fout << "id,brand,capacity,transportation_distance\n";
 
@@ -134,7 +118,7 @@ void TruckDataBase::_updateDbFile() const
     while(p)
     {
         fout << p->id << ","
-             << static_cast<int>(p->brand) << ","
+             << p->brand << ","
              << p->capacity << ","
              << p->transportation_distance;
         fout << "\n";

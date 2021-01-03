@@ -1,167 +1,118 @@
 #include <iostream>
 #include <sstream>
-#include <cstring>
 
 #include "truck/lib_truck.h"
+#include "cmd.h"
 
-enum Command
+void RunCommand(TruckDataBase &db, CMD &cmd)
 {
-    Add,
-    Load,
-    Save,
-    Print,
-    Help,
-    Exit,
-    Skip,
-    NONE,
-};
-
-struct Input
-{
-    Command command = Command::NONE;
-    int argc = 0;
-    char **argv = nullptr;
-};
-
-Input GetInput()
-{
-    const int buff_size = 100 + 1;
-    char *line = new char[buff_size];
-    std::cin.getline(line, buff_size, '\n');
-    if(line[0] == '\0')
+    switch(cmd.command)
     {
-        return Input{Command::Skip};
-    }
-    if(std::cin.fail())
-    {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-
-    Input input;
-    input.argc = 0;
-    input.argv = (char**)malloc(sizeof(char*) * 1);
-
-    std::stringstream ss{line};
-    std::string word;
-    while(getline(ss, word, ' '))
-    {
-        input.argv[input.argc] = new char[word.size()];
-        strcpy(input.argv[input.argc], word.c_str());
-        size_t new_size = sizeof(char*) * (input.argc + 2);
-        input.argv = (char**)realloc(input.argv, new_size);
-        ++input.argc;
-    }
-    return input;
-}
-
-void RunCommand(TruckList &list, Input input)
-{
-    switch(input.command)
-    {
-        case Add:
+        case Command::Add:
+            db.Add();
             break;
-        case Load:
+        case Command::Load:
+            {
+                try
+                {
+                    std::string file;
+                    Input(file, "Path to file: ");
+                    db.Load(file);
+                }
+                catch (const std::exception &e)
+                {
+                    std::cout << "Error loading: " << e.what() << ". Loading aborted.\n";
+                }
+            }
             break;
-        case Save:
+        case Command::Save:
+            {
+                std::string file;
+                Input(file, "Path to file: ");
+                if(std::filesystem::is_directory(file))
+                {
+                    std::cout << "'" << file << "' is a directory.\n";
+                    break;
+                }
+                if(!std::filesystem::exists(file))
+                {
+                    db.Save(file);
+                    break;
+                }
+                std::cout << "File '" << file << "' exists already\n";
+                std::string choice;
+                Input(choice, "Rewrite it? (y/n): ");
+                if(choice != "y")
+                {
+                    std::cout << "Saving aborted\n";
+                    break;
+                }
+                std::cout << "Saving...\n";
+                db.Save(file);
+                std::cout << "Saved\n";
+            }
             break;
-        case Print:
+        case Command::Print:
+            {
+                if (db.list.size == 0)
+                {
+                    std::cout << "Nothing to print. Try 'add'.\n";
+                    break;
+                }
+                int index;
+                Input(index, "Index: ");
+                try
+                {
+                    db.Print(index, true);
+                }
+                catch (const std::exception &e)
+                {
+                    std::cout << e.what() << "\n";
+                }
+            }
             break;
-        case Help:
-        {
-            std::cout << "\nCommands\n";
-            std::cout << "add - add new item in list\n";
-            std::cout << "load <file> - load list from file\n";
-            std::cout << "save <path> - save list in file\n";
-            std::cout << "print [index] - print all items (when [index] given prints item with index)\n";
-            std::cout << "help - see this help\n";
-            std::cout << "exit - exit program\n\n";
-        }
+        case Command::PrintAll:
+            if (db.list.size == 0)
+            {
+                std::cout << "Nothing to print. Try 'add'.\n";
+                break;
+            }
+            db.PrintAll();
             break;
-        case Exit:
+        case Command::Help:
+            {
+                std::cout << "\nCommands:\n";
+                std::cout << "  add - add new item in list\n";
+                std::cout << "  load - load list from file\n";
+                std::cout << "  save - save list in file\n";
+                std::cout << "  print - print item by index\n";
+                std::cout << "  printall - print all items\n";
+                std::cout << "  help - see this help\n";
+                std::cout << "  exit - exit program\n\n";
+            }
             break;
-        case Skip:
+        case Command::Exit:
+        case Command::Skip:
             break;
-        case NONE:
+        case Command::NONE:
+            std::cout << "Unknown command '" << cmd.command_str << "'. Try 'help'\n";
             break;
-    }
-}
-
-Command ParseInput(Input &input)
-{
-    std::string command_str;
-    int command_pos;
-    for(command_pos = 0; command_pos < input.argc; ++command_pos)
-    {
-        if(strcmp(input.argv[command_pos], " ") != 0)
-        {
-            command_str = input.argv[command_pos];
-        }
-    }
-
-    input.command = Command::NONE;
-    if(command_str == "add") input.command = Command::Add;
-    if(command_str == "load") input.command = Command::Load;
-    if(command_str == "save") input.command = Command::Save;
-    if(command_str == "print") input.command = Command::Print;
-    if(command_str == "help") input.command = Command::Help;
-    if(command_str == "exit") input.command = Command::Exit;
-
-    int arg_pos;
-    std::string arg_str;
-    for(arg_pos = command_pos; arg_pos < input.argc; ++arg_pos)
-    {
-        if(strcmp(input.argv[arg_pos], " ") != 0)
-        {
-            arg_str = input.argv[arg_pos];
-        }
-    }
-
-    switch(input.command)
-    {
-        case Load:
-
-        case Save:
-        case Print:
-        case Add:
-        case Help:
-        case Exit:
-        case Skip:
-        case NONE:
-        default:
-          return input.command;
-    }
-}
-
-void StripInput(Input &input)
-{
-    for(int i = 0; i < input.argc; ++i)
-    {
-        if(strcmp(input.argv[i], " ") != 0)
-        {
-            std::string value = input.argv[i];
-        }
     }
 }
 
 int main()
 {
-    TruckList list{};
+    TruckDataBase db{};
     const std::string prompt = "LR3$>";
     Command command = Command::NONE;
+    CMD cmd;
 
     while(command != Command::Exit)
     {
         std::cout << prompt;
-        Input input = GetInput();
-        if(input.command == Command::Skip) continue;
-        if((command = ParseInput(input)) == Command::NONE)
-        {
-            std::cout << "Unknown command '" << input.argv[0] << "'. Try 'help'\n";
-            continue;
-        }
-        input.command = command;
-        RunCommand(list, input);
+        cmd.Get();
+        command = cmd.command;
+        RunCommand(db, cmd);
     }
     return 0;
 }
